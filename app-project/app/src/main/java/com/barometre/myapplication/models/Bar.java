@@ -1,16 +1,16 @@
 package com.barometre.myapplication.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Core data model for a bar.
- * extended with rating and photo_url
- * it can be passed between activities via intent extras.
+ * Extended with rating, tags, and photoUrl.
+ * Implements Serializable so it can be passed through Intent extras.
  */
 public class Bar implements Serializable {
-
-    // fields
+    // Basic fields
     private String id;
     private String name;
     private String street;
@@ -23,17 +23,29 @@ public class Bar implements Serializable {
     private double latitude;
     private double longitude;
 
-    // new fields
+    // Extra app fields
     private double rating;
-    private String photoUrl;     //loaded by glide
+    private List<String> tags;
+    private String photoUrl;
     private boolean isFavorite;
-
     public Bar() {}
 
-    public Bar(String id, String name, String street, String houseNumber,
-               String postcode, String city, String phone, String website,
-               String openingHours, double latitude, double longitude,
-               double rating, List<String> tags, String photoUrl) {
+    // Main constructor
+    public Bar(String id,
+               String name,
+               String street,
+               String houseNumber,
+               String postcode,
+               String city,
+               String phone,
+               String website,
+               String openingHours,
+               double latitude,
+               double longitude,
+               double rating,
+               List<String> tags,
+               String photoUrl) {
+
         this.id = id;
         this.name = name;
         this.street = street;
@@ -45,77 +57,193 @@ public class Bar implements Serializable {
         this.openingHours = openingHours;
         this.latitude = latitude;
         this.longitude = longitude;
+
         this.rating = rating;
+
+        // Prevent null pointer issues
+        this.tags = tags != null ? tags : new ArrayList<>();
+
         this.photoUrl = photoUrl;
+
+        // Default value when app starts
         this.isFavorite = false;
     }
+    // Getters and Setters
+    public String getId() {
+        return id;
+    }
 
-// setters and getters
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getName() {
+        return name;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getStreet() { return street; }
-    public void setStreet(String street) { this.street = street; }
+    public String getStreet() {
+        return street;
+    }
 
-    public String getHouseNumber() { return houseNumber; }
-    public void setHouseNumber(String houseNumber) { this.houseNumber = houseNumber; }
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-    public String getPostcode() { return postcode; }
-    public void setPostcode(String postcode) { this.postcode = postcode; }
+    public String getHouseNumber() {
+        return houseNumber;
+    }
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public String getPostcode() {
+        return postcode;
+    }
 
-    public String getWebsite() { return website; }
-    public void setWebsite(String website) { this.website = website; }
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
 
-    public String getOpeningHours() { return openingHours; }
-    public void setOpeningHours(String openingHours) { this.openingHours = openingHours; }
+    public String getCity() {
+        return city;
+    }
 
-    public double getLatitude() { return latitude; }
-    public void setLatitude(double latitude) { this.latitude = latitude; }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-    public double getLongitude() { return longitude; }
-    public void setLongitude(double longitude) { this.longitude = longitude; }
+    public String getPhone() {
+        return phone;
+    }
 
-    public double getRating() { return rating; }
-    public void setRating(double rating) { this.rating = rating; }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-    public String getPhotoUrl() { return photoUrl; }
-    public void setPhotoUrl(String photoUrl) { this.photoUrl = photoUrl; }
+    public String getWebsite() {
+        return website;
+    }
 
-    public boolean isFavorite() { return isFavorite; }
-    public void setFavorite(boolean favorite) { isFavorite = favorite; }
+    public void setWebsite(String website) {
+        this.website = website;
+    }
 
-    // ----------------------------------------------------------------
+    public String getOpeningHours() {
+        return openingHours;
+    }
+
+    public void setOpeningHours(String openingHours) {
+        this.openingHours = openingHours;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
     // Helpers
-    // ----------------------------------------------------------------
-
-    /**  address to display in the detail screen. */
+    /**
+     * Returns formatted address for display.
+     */
     public String getFullAddress() {
+
         StringBuilder sb = new StringBuilder();
-        if (houseNumber != null && !houseNumber.isEmpty()) sb.append(houseNumber).append(" ");
-        if (street != null && !street.isEmpty()) sb.append(street).append(", ");
-        if (postcode != null && !postcode.isEmpty()) sb.append(postcode).append(" ");
-        if (city != null && !city.isEmpty()) sb.append(city);
+
+        if (houseNumber != null && !houseNumber.isEmpty()) {
+            sb.append(houseNumber).append(" ");
+        }
+
+        if (street != null && !street.isEmpty()) {
+            sb.append(street).append(", ");
+        }
+
+        if (postcode != null && !postcode.isEmpty()) {
+            sb.append(postcode).append(" ");
+        }
+
+        if (city != null && !city.isEmpty()) {
+            sb.append(city);
+        }
+
         return sb.toString().trim();
     }
 
-    /** returns true if the bar has  GPS coordinates. */
+    /**
+     * Returns true if bar has valid coordinates.
+     */
     public boolean hasCoordinates() {
         return latitude != 0.0 && longitude != 0.0;
     }
 
+    /**
+     * Converts tags list into display text.
+     * Example:
+     * rooftop • cocktails • live music
+     */
+    public String getTagsString() {
 
+        if (tags == null || tags.isEmpty()) {
+            return "";
+        }
+
+        return String.join(" • ", tags);
+    }
+    // Debug helper
     @Override
     public String toString() {
-        return "Bar{id='" + id + "', name='" + name + "', city='" + city + "'}";
+        return "Bar{id='"
+                + id
+                + "', name='"
+                + name
+                + "', city='"
+                + city
+                + "'}";
     }
 }
