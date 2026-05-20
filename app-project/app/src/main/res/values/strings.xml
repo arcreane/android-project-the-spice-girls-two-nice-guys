@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="offline_banner">
-    You are offline — showing cached bars
-</string>
+    <string name="offline_banner">You are offline — showing cached bars</string>
+    <string name="bar_image_description">Bar photo</string>
 </resources>
