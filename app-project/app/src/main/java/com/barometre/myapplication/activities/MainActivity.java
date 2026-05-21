@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.barometre.myapplication.R;
+import com.barometre.myapplication.filters.FilterFragment;
 import com.barometre.myapplication.location.LocationViewModel;
 
 import android.location.Location;
@@ -41,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.testThemeButton).setOnClickListener(v -> {
             requestUserLocation();
+        });
+
+        findViewById(R.id.openFiltersButton).setOnClickListener(v -> {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.filterContainer, new FilterFragment())
+                    .addToBackStack(null)
+                    .commit();
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
