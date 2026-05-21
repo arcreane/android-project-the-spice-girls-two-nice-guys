@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Light mode: foggy daytime version of the neon bar identity -->
+
+    <!-- Base surfaces -->
+    <color name="colorBackground">#F4F0E8</color>
+    <color name="colorSurface">#FFFDF8</color>
+    <color name="colorSurfaceSoft">#EAE2D7</color>
+    <color name="colorSurfaceStrong">#D8CFC2</color>
+
+    <!-- Text -->
+    <color name="colorTextPrimary">#14110F</color>
+    <color name="colorTextSecondary">#5F5750</color>
+    <color name="colorTextMuted">#8B8177</color>
+
+    <!-- Neon identity accents -->
+    <color name="colorPrimary">#6EA800</color>
+    <color name="colorPrimaryDark">#2C4300</color>
+    <color name="colorPrimaryGlow">#B7FF1A</color>
+
+    <color name="colorSecondary">#E7541E</color>
+    <color name="colorSecondaryGlow">#FF7A1A</color>
+
+    <color name="colorTertiary">#174C9F</color>
+    <color name="colorTertiaryGlow">#36C8FF</color>
+
+    <!-- UI states -->
+    <color name="colorFavorite">#FF365E</color>
+    <color name="colorRating">#FFB84D</color>
+    <color name="colorSuccess">#3B8C4A</color>
+    <color name="colorError">#B3261E</color>
+
+    <!-- Map/list helpers -->
+    <color name="colorDivider">#D8CFC2</color>
+    <color name="colorChipBackground">#E9F5D3</color>
+    <color name="colorChipText">#253500</color>
+
 </resources>

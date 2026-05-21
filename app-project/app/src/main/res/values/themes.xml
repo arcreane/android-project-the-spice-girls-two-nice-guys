@@ -1,9 +1,36 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.TheSpice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Main brand colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorAccent">@color/colorSecondaryGlow</item>
+
+        <!-- App background -->
+        <item name="android:windowBackground">@color/colorBackground</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Text -->
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+
+        <!-- Default font -->
+        <item name="android:fontFamily">sans</item>
+
+        <!-- Material surfaces -->
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorTextPrimary</item>
+        <item name="colorOnPrimary">@color/colorBackground</item>
+        <item name="colorOnSecondary">@color/colorTextPrimary</item>
+
     </style>
 
-    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
 </resources>
