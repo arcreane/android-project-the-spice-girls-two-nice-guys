@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.barometre.myapplication.R;
+import com.barometre.myapplication.location.LocationViewModel;
 
 import android.location.Location;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.barometre.myapplication.location.LocationHelper;
 public class MainActivity extends AppCompatActivity {
 
     private LocationHelper locationHelper;
+    private LocationViewModel locationViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         locationHelper = new LocationHelper(this);
+        locationViewModel = new ViewModelProvider(this).get(LocationViewModel.class);
 
         findViewById(R.id.testSettingsButton).setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingsActivity.class);
@@ -55,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         locationHelper.getLastKnownLocation(new LocationHelper.LocationCallback() {
             @Override
             public void onLocationReceived(Location location) {
+                locationViewModel.setUserLocation(location);
+
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
