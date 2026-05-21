@@ -125,24 +125,24 @@
                     android:background="?attr/colorOutline"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_open_website"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:id="@+id/btn_open_website"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="Open Website"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_open_maps"
                     style="@style/Widget.MaterialComponents.Button"
+                    android:id="@+id/btn_open_maps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="Get Directions"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_share_bar"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:id="@+id/btn_share_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Share"/>
