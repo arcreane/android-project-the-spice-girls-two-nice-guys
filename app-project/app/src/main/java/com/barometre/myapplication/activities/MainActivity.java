@@ -11,7 +11,16 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.barometre.myapplication.R;
 
+import android.location.Location;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.barometre.myapplication.location.LocationHelper;
+
 public class MainActivity extends AppCompatActivity {
+
+    private LocationHelper locationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +28,15 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        locationHelper = new LocationHelper(this);
+
         findViewById(R.id.testSettingsButton).setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+        });
+
+        findViewById(R.id.testThemeButton).setOnClickListener(v -> {
+            requestUserLocation();
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -29,5 +44,58 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void requestUserLocation() {
+        if (!locationHelper.hasLocationPermission()) {
+            locationHelper.requestLocationPermission(this);
+            return;
+        }
+
+        locationHelper.getLastKnownLocation(new LocationHelper.LocationCallback() {
+            @Override
+            public void onLocationReceived(Location location) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                Toast.makeText(
+                        MainActivity.this,
+                        "Location found " + latitude + ", " + longitude,
+                        Toast.LENGTH_LONG
+
+                ).show();
+
+            }
+
+            @Override
+            public void onLocationError(String message) {
+                Toast.makeText(
+                        MainActivity.this,
+                        message,
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LocationHelper.LOCATION_PERMISSION_REQUEST_CODE) {
+            if (locationHelper.hasLocationPermission()) {
+                requestUserLocation();
+            } else {
+                Toast.makeText(
+                        this,
+                        "Location permission denied",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        }
     }
 }
