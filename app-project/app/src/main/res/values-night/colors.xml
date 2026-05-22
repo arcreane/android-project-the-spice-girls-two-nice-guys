@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Dark mode: neon bar, glowing fog, dark lounge atmosphere -->
+
+    <!-- Base surfaces -->
+    <color name="colorBackground">#080705</color>
+    <color name="colorSurface">#14100D</color>
+    <color name="colorSurfaceSoft">#211912</color>
+    <color name="colorSurfaceStrong">#302015</color>
+
+    <!-- Text -->
+    <color name="colorTextPrimary">#FFF7EA</color>
+    <color name="colorTextSecondary">#CFC2B4</color>
+    <color name="colorTextMuted">#8F8175</color>
+
+    <!-- Neon identity accents -->
+    <color name="colorPrimary">#B7FF1A</color>
+    <color name="colorPrimaryDark">#5F8F00</color>
+    <color name="colorPrimaryGlow">#D6FF54</color>
+
+    <color name="colorSecondary">#FF4B1F</color>
+    <color name="colorSecondaryGlow">#FF7A1A</color>
+
+    <color name="colorTertiary">#365CFF</color>
+    <color name="colorTertiaryGlow">#36C8FF</color>
+
+    <!-- UI states -->
+    <color name="colorFavorite">#FF365E</color>
+    <color name="colorRating">#FFB84D</color>
+    <color name="colorSuccess">#6FE38A</color>
+    <color name="colorError">#FFB4AB</color>
+
+    <!-- Map/list helpers -->
+    <color name="colorDivider">#352820</color>
+    <color name="colorChipBackground">#26360B</color>
+    <color name="colorChipText">#D6FF54</color>
+
+</resources>
