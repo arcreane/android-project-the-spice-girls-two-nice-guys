@@ -2,12 +2,17 @@ package com.barometre.myapplication.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class BarDbHelper extends SQLiteOpenHelper {
@@ -34,6 +39,7 @@ public class BarDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PHOTO_URL = "photo_url";
     public static final String COLUMN_IS_FAVORITE = "is_favorite";
     public static final String COLUMN_LAST_VIEWED = "last_viewed";
+    public static final String TAGS_SEPARATOR = " • ";
 
     public BarDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -69,31 +75,33 @@ public class BarDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BARS);
         onCreate(db);
     }
-
-    /**
-     * Directly streams flat, relational-mapped key-values cleanly into SQLite rows
-     * without running structural translations, type assertions, or nested parsing.
-     */
     private void seedRelationalCache(SQLiteDatabase db) {
         db.beginTransaction();
         try {
-            int resourceId = context.getResources().getIdentifier("paris_bars", "raw", context.getPackageName());
-            if (resourceId == 0) return;
+            int resourceId = context.getResources().getIdentifier(
+                    "paris_bars", "raw", context.getPackageName());
+            if (resourceId == 0) {
+                Log.w(TAG, "paris_bars raw resource not found — skipping seed");
+                return;
+            }
+
 
             InputStream is = context.getResources().openRawResource(resourceId);
-            byte[] buffer = new byte[is.available()];
-            int readBytes = is.read(buffer);
-            is.close();
-            if (readBytes <= 0) return;
+            StringBuilder sb = new StringBuilder();
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(is, StandardCharsets.UTF_8));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+            reader.close();
 
-            String jsonString = new String(buffer, StandardCharsets.UTF_8);
-            JSONArray jsonArray = new JSONArray(jsonString);
+            JSONArray jsonArray = new JSONArray(sb.toString());
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject obj = jsonArray.getJSONObject(i);
                 ContentValues values = new ContentValues();
 
-                // 1-to-1 Direct relational mappings. No nested object unboxing.
                 values.put(COLUMN_ID, obj.optString("id", "bar_" + i));
                 values.put(COLUMN_NAME, obj.optString("name", ""));
                 values.put(COLUMN_STREET, obj.optString("street", ""));
@@ -103,26 +111,64 @@ public class BarDbHelper extends SQLiteOpenHelper {
                 values.put(COLUMN_PHONE, obj.optString("phone", ""));
                 values.put(COLUMN_WEBSITE, obj.optString("website", ""));
                 values.put(COLUMN_OPENING_HOURS, obj.optString("opening_hours", ""));
-
-                // Pure primitive mappings directly out of flat layout
                 values.put(COLUMN_LATITUDE, obj.optDouble("latitude", 0.0));
                 values.put(COLUMN_LONGITUDE, obj.optDouble("longitude", 0.0));
                 values.put(COLUMN_RATING, obj.optDouble("rating", 4.0));
-                values.put(COLUMN_TAGS, obj.optString("tags", ""));
-                values.put(COLUMN_PHOTO_URL, obj.optString("photo_url", ""));
 
-                // Track state initializations
+                // Store tags string as-is from JSON — already uses " • " separator.
+                // Use tagsFromJson() if you need to normalise other formats later.
+                values.put(COLUMN_TAGS, obj.optString("tags", ""));
+
+                values.put(COLUMN_PHOTO_URL, obj.optString("photo_url", ""));
                 values.put(COLUMN_IS_FAVORITE, 0);
                 values.put(COLUMN_LAST_VIEWED, 0);
 
                 db.insert(TABLE_BARS, null, values);
             }
+
             db.setTransactionSuccessful();
-            Log.d(TAG, "Relational pre-mapped cache successfully seeded.");
+            Log.d(TAG, "Seeded " + jsonArray.length() + " bars successfully.");
+
         } catch (Exception e) {
-            Log.e(TAG, "Failed seeding from relational structure", e);
+            Log.e(TAG, "Failed seeding bars", e);
         } finally {
             db.endTransaction();
         }
+    }
+    public static java.util.List<String> tagsFromDb(String raw) {
+        if (raw == null || raw.trim().isEmpty()) {
+            return new java.util.ArrayList<>();
+        }
+        String[] parts = raw.split(java.util.regex.Pattern.quote(TAGS_SEPARATOR));
+        java.util.List<String> list = new java.util.ArrayList<>();
+        for (String part : parts) {
+            String trimmed = part.trim();
+            if (!trimmed.isEmpty()) {
+                list.add(trimmed);
+            }
+        }
+        return list;
+    }
+
+    public static String tagsToDb(java.util.List<String> tags) {
+        if (tags == null || tags.isEmpty()) return "";
+        return android.text.TextUtils.join(TAGS_SEPARATOR, tags);
+    }
+
+    public static String getString(Cursor cursor, String column) {
+        int idx = cursor.getColumnIndex(column);
+        if (idx == -1) return "";
+        String val = cursor.getString(idx);
+        return val != null ? val : "";
+    }
+
+    public static double getDouble(Cursor cursor, String column) {
+        int idx = cursor.getColumnIndex(column);
+        return idx == -1 ? 0.0 : cursor.getDouble(idx);
+    }
+
+    public static int getInt(Cursor cursor, String column) {
+        int idx = cursor.getColumnIndex(column);
+        return idx == -1 ? 0 : cursor.getInt(idx);
     }
 }
