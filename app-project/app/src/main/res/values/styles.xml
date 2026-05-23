@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Screen backgrounds -->
+
+    <style name="ScreenRoot">
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="CardSurface">
+        <item name="android:background">@color/colorSurface</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <!-- Text styles -->
+
+    <style name="TextTitle">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubtitle">
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextBody">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextMuted">
+        <item name="android:textColor">@color/colorTextMuted</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Neon elements -->
+
+    <style name="NeonPrimaryText">
+        <item name="android:textColor">@color/colorPrimaryGlow</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NeonSecondaryText">
+        <item name="android:textColor">@color/colorSecondaryGlow</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Buttons -->
+
+    <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="cornerRadius">18dp</item>
+    </style>
+
+    <style name="SecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/colorSecondaryGlow</item>
+        <item name="android:textColor">@color/colorSecondaryGlow</item>
+        <item name="cornerRadius">18dp</item>
+    </style>
+
+    <!-- Chips / tags -->
+
+    <style name="BarTagChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/colorChipBackground</item>
+        <item name="android:textColor">@color/colorChipText</item>
+        <item name="chipStrokeColor">@color/colorPrimaryDark</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+</resources>
