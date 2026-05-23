@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -70,14 +71,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
         barViewModel = new ViewModelProvider(requireActivity()).get(BarViewModel.class);
     }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (googleMap != null) {
+            outState.putParcelable("camera", googleMap.getCameraPosition());
+        }
+    }
 
     //setup marker and tap listener
     @Override
     public void onMapReady(@NonNull GoogleMap map) {
         googleMap = map;
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PARIS_CENTER, DEFAULT_ZOOM));
-
+        // Restore camera if returning from rotation
+        Bundle args = getArguments();
+        if (args != null && args.containsKey("camera")) {
+            CameraPosition saved = args.getParcelable("camera");
+            if (saved != null) {
+                googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(saved));
+            }
+        } else {
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PARIS_CENTER, DEFAULT_ZOOM));
+        }
         googleMap.setOnMarkerClickListener(marker -> {
             Bar bar = markerBarMap.get(marker);
             if (bar != null && listener != null) {
