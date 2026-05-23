@@ -39,8 +39,6 @@ public class BarDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PHOTO_URL = "photo_url";
     public static final String COLUMN_IS_FAVORITE = "is_favorite";
     public static final String COLUMN_LAST_VIEWED = "last_viewed";
-
-    // Separator used when storing and reading tags
     public static final String TAGS_SEPARATOR = " • ";
 
     public BarDbHelper(Context context) {
@@ -77,13 +75,6 @@ public class BarDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BARS);
         onCreate(db);
     }
-
-    /**
-     * Reads the raw JSON resource fully using a BufferedReader (safe for large files),
-     * then inserts each bar as a flat relational row.
-     * Tags are stored as a single string using TAGS_SEPARATOR so they can be
-     * split back into a List<String> on the read side without any schema change.
-     */
     private void seedRelationalCache(SQLiteDatabase db) {
         db.beginTransaction();
         try {
@@ -94,7 +85,7 @@ public class BarDbHelper extends SQLiteOpenHelper {
                 return;
             }
 
-            // Use BufferedReader instead of available() — safe for any file size
+
             InputStream is = context.getResources().openRawResource(resourceId);
             StringBuilder sb = new StringBuilder();
             BufferedReader reader = new BufferedReader(
@@ -144,13 +135,6 @@ public class BarDbHelper extends SQLiteOpenHelper {
             db.endTransaction();
         }
     }
-
-    /**
-     * Converts the stored tags string back into a List<String>.
-     * Call this whenever you read a row from the DB.
-     *
-     * Example:  "Paris • Bar • Chilling"  →  ["Paris", "Bar", "Chilling"]
-     */
     public static java.util.List<String> tagsFromDb(String raw) {
         if (raw == null || raw.trim().isEmpty()) {
             return new java.util.ArrayList<>();
@@ -166,21 +150,11 @@ public class BarDbHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    /**
-     * Converts a List<String> of tags into the DB storage format.
-     * Call this when writing tags that didn't come directly from the JSON.
-     *
-     * Example:  ["Paris", "Bar", "Chilling"]  →  "Paris • Bar • Chilling"
-     */
     public static String tagsToDb(java.util.List<String> tags) {
         if (tags == null || tags.isEmpty()) return "";
         return android.text.TextUtils.join(TAGS_SEPARATOR, tags);
     }
 
-    /**
-     * Helper: reads a String column safely from a cursor by column name.
-     * Returns empty string instead of null so callers don't need null checks.
-     */
     public static String getString(Cursor cursor, String column) {
         int idx = cursor.getColumnIndex(column);
         if (idx == -1) return "";
@@ -188,17 +162,11 @@ public class BarDbHelper extends SQLiteOpenHelper {
         return val != null ? val : "";
     }
 
-    /**
-     * Helper: reads a double column safely from a cursor by column name.
-     */
     public static double getDouble(Cursor cursor, String column) {
         int idx = cursor.getColumnIndex(column);
         return idx == -1 ? 0.0 : cursor.getDouble(idx);
     }
 
-    /**
-     * Helper: reads an int column safely from a cursor by column name.
-     */
     public static int getInt(Cursor cursor, String column) {
         int idx = cursor.getColumnIndex(column);
         return idx == -1 ? 0 : cursor.getInt(idx);
