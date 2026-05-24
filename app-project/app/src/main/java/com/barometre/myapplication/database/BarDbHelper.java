@@ -114,11 +114,7 @@ public class BarDbHelper extends SQLiteOpenHelper {
                 values.put(COLUMN_LATITUDE, obj.optDouble("latitude", 0.0));
                 values.put(COLUMN_LONGITUDE, obj.optDouble("longitude", 0.0));
                 values.put(COLUMN_RATING, obj.optDouble("rating", 4.0));
-
-                // Store tags string as-is from JSON — already uses " • " separator.
-                // Use tagsFromJson() if you need to normalise other formats later.
                 values.put(COLUMN_TAGS, obj.optString("tags", ""));
-
                 values.put(COLUMN_PHOTO_URL, obj.optString("photo_url", ""));
                 values.put(COLUMN_IS_FAVORITE, 0);
                 values.put(COLUMN_LAST_VIEWED, 0);

@@ -27,5 +27,6 @@
     <string name="settings_title"> Settings </string>
     <string name="settings_subtitle"> Customise your nightlife discovery experience </string>
     <string name="settings_dark_mode"> Dark neon mode </string>
+    <string name="favorites_empty">No favourites yet. Tap a bar and long-press to save it.</string>
 
 </resources>

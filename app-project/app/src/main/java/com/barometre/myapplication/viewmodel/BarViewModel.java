@@ -16,7 +16,7 @@ import java.util.List;
 public class BarViewModel extends ViewModel {
 
     // swap FakeRepository for actual repository later
-    private final IBarRepository repository = new FakeRepository();
+    private IBarRepository repository;
 
     // all bars
     private final MutableLiveData<List<Bar>> bars = new MutableLiveData<>();
@@ -29,6 +29,12 @@ public class BarViewModel extends ViewModel {
 
     // offline mode flag
     private final MutableLiveData<Boolean> isOffline = new MutableLiveData<>(false);
+
+    public void init(android.content.Context context) {
+        if (repository == null) {
+            repository = new com.barometre.myapplication.repositories.BarRepository(context);
+        }
+    }
 
     public void loadAllBars() {
         List<Bar> all = repository.getAllBars();

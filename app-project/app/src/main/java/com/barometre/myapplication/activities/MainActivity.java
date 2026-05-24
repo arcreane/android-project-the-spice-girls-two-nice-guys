@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
 
         // Shared bar ViewModel
         barViewModel = new ViewModelProvider(this).get(BarViewModel.class);
+        barViewModel.init(this);
         barViewModel.loadAllBars();
 
         // P5: Location setup
