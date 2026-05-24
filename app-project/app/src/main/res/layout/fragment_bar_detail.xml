@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="?attr/colorSurface">
+        app:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:layout_height="220dp"
                 android:contentDescription="@string/bar_image_description"
                 android:scaleType="centerCrop"
-                android:background="?attr/colorSurfaceVariant"/>
+                android:background="@android:color/white"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,9 +37,9 @@
                     android:id="@+id/tv_detail_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceHeadline5"
-                    android:textColor="?attr/colorOnSurface"
-                    android:text="Bar Name"/>
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@android:color/black"
+                    android:text="@string/placeholder_bar_name"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,9 +62,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:text="0.0 / 5"/>
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textColor="@android:color/black"
+                        android:text="@string/placeholder_rating"/>
 
                 </LinearLayout>
 
@@ -73,48 +73,48 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="12dp"
-                    android:background="?attr/colorOutline"/>
+                    android:background="@android:color/darker_gray"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceOverline"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:text="ADDRESS"/>
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                    android:textColor="@android:color/black"
+                    android:text="@string/label_address"/>
 
                 <TextView
                     android:id="@+id/tv_detail_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="?attr/colorOnSurface"
-                    android:text="123 Rue de la Paix, 75001 Paris"/>
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textColor="@android:color/black"
+                    android:text="@string/placeholder_address"/>
 
                 <TextView
                     android:id="@+id/tv_detail_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textColor="@android:color/black"
                     android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:textAppearance="?attr/textAppearanceOverline"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:text="OPENING HOURS"/>
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                    android:textColor="@android:color/black"
+                    android:text="@string/label_opening_hours"/>
 
                 <TextView
                     android:id="@+id/tv_detail_hours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?attr/colorOnSurface"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textColor="@android:color/black"
                     android:visibility="gone"/>
 
                 <View
@@ -122,7 +122,7 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="?attr/colorOutline"/>
+                    android:background="@android:color/darker_gray"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -130,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Open Website"/>
+                    android:text="@string/btn_open_website"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.Button"
@@ -138,14 +138,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Get Directions"/>
+                    android:text="@string/btn_get_directions"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:id="@+id/btn_share_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Share"/>
+                    android:text="@string/btn_share"/>
 
             </LinearLayout>
         </LinearLayout>
