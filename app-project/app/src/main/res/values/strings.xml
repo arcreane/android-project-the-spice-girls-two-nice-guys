@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="offline_banner">You are offline — showing cached bars</string>
-    <string name="bar_image_description">Bar photo</string>
+
+    <string name="app_name">Barometre</string>
+
+    <string name="offline_banner">You are offline. Showing cached bars.</string>
+    <string name="bar_image_description">Photo of the bar</string>
+
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.android.material:material:1.11.0")
+    implementation(libs.google.material)
+    implementation(libs.androidx.appcompat)
+
 </resources>
