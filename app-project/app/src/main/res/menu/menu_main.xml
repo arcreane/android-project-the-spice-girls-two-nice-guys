@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- filter -->
     <item
         android:id="@+id/action_filter"
         android:title="@string/menu_filter"
@@ -13,28 +12,26 @@
         android:id="@+id/action_near_me"
         android:title="@string/menu_bars_near_me"
         android:icon="@android:drawable/ic_menu_mylocation"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom" />
 
-        />
-
-    <!-- sorts by rating -->
     <item
         android:id="@+id/action_sort_rating"
         android:title="@string/menu_sort_by_rating"
         app:showAsAction="never" />
 
-    <!-- favorites -->
     <item
         android:id="@+id/action_show_favorites"
         android:title="@string/menu_favourites"
-        app:showAsAction="never"
- />
+        app:showAsAction="never" />
 
-    <!-- settings -->
     <item
         android:id="@+id/action_settings"
         android:title="@string/menu_settings"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_map"
+        android:title="Map view"
+        app:showAsAction="never" />
 
 </menu>

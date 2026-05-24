@@ -3,15 +3,16 @@ package com.barometre.myapplication.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.barometre.myapplication.R;
+import com.barometre.myapplication.databinding.ItemBarBinding;
 import com.barometre.myapplication.models.Bar;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BarAdapter extends RecyclerView.Adapter<BarAdapter.BarViewHolder> {
 
@@ -19,26 +20,34 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.BarViewHolder> {
         void onBarClick(Bar bar);
     }
 
-    private final List<Bar> bars;
+    private List<Bar> bars = new ArrayList<>();
     private final OnBarClickListener listener;
 
-    public BarAdapter(List<Bar> bars, OnBarClickListener listener) {
-        this.bars = bars;
+    public BarAdapter(OnBarClickListener listener) {
         this.listener = listener;
+    }
+
+    public BarAdapter(List<Bar> initialBars, OnBarClickListener listener) {
+        this.listener = listener;
+        if (initialBars != null) this.bars = new ArrayList<>(initialBars);
+    }
+
+    public void setBars(List<Bar> newBars) {
+        bars = newBars != null ? newBars : new ArrayList<>();
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public BarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_bar, parent, false);
-        return new BarViewHolder(view);
+        ItemBarBinding binding = ItemBarBinding.inflate(
+                LayoutInflater.from(parent.getContext()), parent, false);
+        return new BarViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BarViewHolder holder, int position) {
-        Bar bar = bars.get(position);
-        holder.bind(bar, listener);
+        holder.bind(bars.get(position));
     }
 
     @Override
@@ -46,30 +55,28 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.BarViewHolder> {
         return bars.size();
     }
 
-    public void updateBars(List<Bar> newBars) {
-        bars.clear();
-        bars.addAll(newBars);
-        notifyDataSetChanged();
-    }
+    class BarViewHolder extends RecyclerView.ViewHolder {
+        private final ItemBarBinding binding;
 
-    static class BarViewHolder extends RecyclerView.ViewHolder {
-
-        private final TextView tvName;
-        private final TextView tvAddress;
-        private final TextView tvRating;
-
-        public BarViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvName    = itemView.findViewById(R.id.tv_bar_name);
-            tvAddress = itemView.findViewById(R.id.tv_bar_address);
-            tvRating  = itemView.findViewById(R.id.tv_bar_rating);
+        BarViewHolder(ItemBarBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        public void bind(Bar bar, OnBarClickListener listener) {
-            tvName.setText(bar.getName());
-            tvAddress.setText(bar.getFullAddress());
-            tvRating.setText(String.format("★ %.1f", bar.getRating()));
-            itemView.setOnClickListener(v -> listener.onBarClick(bar));
+        void bind(Bar bar) {
+            binding.barName.setText(bar.getName());
+            binding.barAddress.setText(bar.getFullAddress());
+            binding.barRating.setText(String.format(Locale.getDefault(), "★ %.1f", bar.getRating()));
+
+            String tags = bar.getTagsString();
+            if (tags.isEmpty()) {
+                binding.barTags.setVisibility(View.GONE);
+            } else {
+                binding.barTags.setText(tags);
+                binding.barTags.setVisibility(View.VISIBLE);
+            }
+
+            binding.getRoot().setOnClickListener(v -> listener.onBarClick(bar));
         }
     }
 }

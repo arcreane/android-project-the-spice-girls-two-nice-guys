@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.barometre.myapplication.R;
 import com.barometre.myapplication.filters.FilterFragment;
 import com.barometre.myapplication.fragments.BarDetailFragment;
+import com.barometre.myapplication.fragments.BarListFragment;
 import com.barometre.myapplication.fragments.MapFragment;
 import com.barometre.myapplication.location.LocationHelper;
 import com.barometre.myapplication.location.LocationViewModel;
@@ -28,7 +29,8 @@ import com.barometre.myapplication.viewmodel.BarViewModel;
 
 
 public class MainActivity extends AppCompatActivity
-        implements MapFragment.OnBarSelectedListener {
+        implements MapFragment.OnBarSelectedListener,
+                   BarListFragment.OnBarSelectedListener {
 
     private BarViewModel barViewModel;
     private LocationViewModel locationViewModel;
@@ -44,37 +46,28 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Bar-omètre");
         }
 
-        // Offline banner
         offlineBanner = findViewById(R.id.tv_offline_banner);
-
-        // Detects orientation: landscape layout has a detail container
         isLandscape = findViewById(R.id.fragment_container_detail) != null;
 
-        // Shared bar ViewModel
         barViewModel = new ViewModelProvider(this).get(BarViewModel.class);
         barViewModel.init(this);
         barViewModel.loadAllBars();
 
-        // P5: Location setup
         locationHelper = new LocationHelper(this);
         locationViewModel = new ViewModelProvider(this).get(LocationViewModel.class);
 
-        // Load map fragment
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container_map, new MapFragment())
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container_map, new BarListFragment())
                     .commit();
         }
 
-        // Offline state observer
         barViewModel.getIsOffline().observe(this, isOffline -> {
             if (isOffline) {
                 showOfflineBanner();
@@ -84,7 +77,6 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    // Toolbar menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -99,22 +91,22 @@ public class MainActivity extends AppCompatActivity
             barViewModel.sortByRating();
             return true;
         }
-
+        if (id == R.id.action_show_map) {
+            showMapView();
+            return true;
+        }
         if (id == R.id.action_show_favorites) {
             navigateToFavorites();
             return true;
         }
-
         if (id == R.id.action_settings) {
             navigateToSettings();
             return true;
         }
-
         if (id == R.id.action_filter) {
             showFilterPanel();
             return true;
         }
-
         if (id == R.id.action_near_me) {
             requestUserLocation();
             return true;
@@ -123,16 +115,13 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    // P5: Filter panel
     private void showFilterPanel() {
-        getSupportFragmentManager()
-                .beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container_map, new FilterFragment())
-                .addToBackStack(null)
+                .addToBackStack("filter")
                 .commit();
     }
 
-    // P5: GPS request
     private void requestUserLocation() {
         if (!locationHelper.hasLocationPermission()) {
             locationHelper.requestLocationPermission(this);
@@ -179,16 +168,11 @@ public class MainActivity extends AppCompatActivity
             if (locationHelper.hasLocationPermission()) {
                 requestUserLocation();
             } else {
-                Toast.makeText(
-                        this,
-                        "Location permission denied",
-                        Toast.LENGTH_SHORT
-                ).show();
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    // Map marker selection
     @Override
     public void onBarSelected(Bar bar) {
         barViewModel.selectBar(bar);
@@ -203,7 +187,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // Navigators
+    public void showMapView() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_map, new MapFragment())
+                .addToBackStack("map")
+                .commit();
+    }
+
     public void navigateToBarDetail(Bar bar) {
         Intent intent = new Intent(this, BarDetailActivity.class);
         intent.putExtra(BarDetailActivity.EXTRA_BAR, bar);
@@ -218,7 +208,6 @@ public class MainActivity extends AppCompatActivity
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    // Offline banner
     public void showOfflineBanner() {
         if (offlineBanner != null) {
             offlineBanner.setVisibility(View.VISIBLE);
@@ -230,8 +219,6 @@ public class MainActivity extends AppCompatActivity
             offlineBanner.setVisibility(View.GONE);
         }
     }
-
-    // Lifecycle
 
     @Override
     protected void onStart() {

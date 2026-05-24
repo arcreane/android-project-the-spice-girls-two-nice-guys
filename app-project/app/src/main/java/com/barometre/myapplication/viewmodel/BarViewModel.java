@@ -6,66 +6,33 @@ import androidx.lifecycle.ViewModel;
 
 import com.barometre.myapplication.filters.FilterOptions;
 import com.barometre.myapplication.models.Bar;
+import com.barometre.myapplication.repositories.FakeRepository;
 import com.barometre.myapplication.repositories.IBarRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// communication between fragments
 public class BarViewModel extends ViewModel {
 
-    // swap FakeRepository for actual repository later
-    private IBarRepository repository = null;
+    private IBarRepository repository = new FakeRepository();
 
-    // all bars
-    private final MutableLiveData<List<Bar>> bars = new MutableLiveData<>();
-
-    // currently selected bar/map marker tap
-    private final MutableLiveData<Bar> selectedBar = new MutableLiveData<>();
-
-    // filtered bars
     private final MutableLiveData<List<Bar>> filteredBars = new MutableLiveData<>();
-
-    // offline mode flag
+    private final MutableLiveData<Bar> selectedBar = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isOffline = new MutableLiveData<>(false);
 
+    private String searchQuery = "";
+    private boolean sortByRatingEnabled = false;
+    private FilterOptions activeFilters = FilterOptions.defaultFilters();
+
     public void init(android.content.Context context) {
-        if (repository == null) {
+        if (repository instanceof FakeRepository) {
             repository = new com.barometre.myapplication.repositories.BarRepository(context);
         }
     }
 
     public void loadAllBars() {
-        List<Bar> all = repository.getAllBars();
-        bars.setValue(all);
-        filteredBars.setValue(all);
-    }
-
-    public void sortByRating() {
-        filteredBars.setValue(repository.getBarsSortedByRating());
-    }
-
-    public void applyFilters(String city, List<String> tags, double minRating) {
-        filteredBars.setValue(repository.getFilteredBars(city, tags, minRating));
-    }
-
-    public void applyFilterOptions(FilterOptions options) {
-        if (options == null) {
-            filteredBars.setValue(bars.getValue());
-            return;
-        }
-
-        List<String> tags = null;
-
-        if (options.getType() != null && !options.getType().equalsIgnoreCase("All")) {
-            tags = Collections.singletonList(options.getType());
-        }
-
-        applyFilters(null, tags, options.getMinimumRating());
-    }
-
-    public void showBarsNearLocation(double latitude, double longitude, double radiusKm) {
-        filteredBars.setValue(repository.getBarsNearLocation(latitude, longitude, radiusKm));
+        refresh();
     }
 
     public void selectBar(Bar bar) {
@@ -75,27 +42,89 @@ public class BarViewModel extends ViewModel {
     public void setOfflineMode(boolean offline) {
         isOffline.setValue(offline);
         if (offline) {
-            List<Bar> cached = repository.getCachedBars();
-            bars.setValue(cached);
-            filteredBars.setValue(cached);
+            filteredBars.setValue(repository.getCachedBars());
         } else {
-            loadAllBars();
+            refresh();
         }
     }
 
-    public LiveData<List<Bar>> getBars() {
-        return bars;
+    public void setSearchQuery(String query) {
+        searchQuery = query != null ? query.trim() : "";
+        refresh();
     }
 
-    public LiveData<List<Bar>> getFilteredBars() {
-        return filteredBars;
+    public void sortByRating() {
+        sortByRatingEnabled = !sortByRatingEnabled;
+        refresh();
     }
 
-    public LiveData<Bar> getSelectedBar() {
-        return selectedBar;
+    public void setSortByRating(boolean enabled) {
+        sortByRatingEnabled = enabled;
+        refresh();
     }
 
-    public LiveData<Boolean> getIsOffline() {
-        return isOffline;
+    public boolean isSortByRatingEnabled() {
+        return sortByRatingEnabled;
     }
+
+    public void setFilters(FilterOptions filters) {
+        activeFilters = filters != null ? filters : FilterOptions.defaultFilters();
+        refresh();
+    }
+
+    public void setTypeFilter(String type) {
+        activeFilters = new FilterOptions(
+                type != null ? type : "All",
+                activeFilters.getMinimumRating(),
+                activeFilters.getMaxDistanceKm()
+        );
+        refresh();
+    }
+
+    public void applyFilters(String city, List<String> tags, double minRating) {
+        filteredBars.setValue(repository.getFilteredBars(city, tags, minRating));
+    }
+
+    public void applyFilterOptions(FilterOptions options) {
+        if (options == null) {
+            setFilters(FilterOptions.defaultFilters());
+            return;
+        }
+        setFilters(options);
+    }
+
+    public void showBarsNearLocation(double latitude, double longitude, double radiusKm) {
+        filteredBars.setValue(repository.getBarsNearLocation(latitude, longitude, radiusKm));
+    }
+
+    private void refresh() {
+        List<Bar> result;
+
+        boolean hasSearch = !searchQuery.isEmpty();
+        boolean hasTypeFilter = !"All".equals(activeFilters.getType());
+        boolean hasRatingFilter = activeFilters.getMinimumRating() > 0;
+
+        if (hasSearch) {
+            result = repository.searchBarsByName(searchQuery);
+        } else if (hasTypeFilter || hasRatingFilter) {
+            List<String> tags = hasTypeFilter
+                    ? Collections.singletonList(activeFilters.getType())
+                    : null;
+            result = repository.getFilteredBars(null, tags, activeFilters.getMinimumRating());
+        } else {
+            result = repository.getAllBars();
+        }
+
+        if (sortByRatingEnabled) {
+            result = new ArrayList<>(result);
+            result.sort((a, b) -> Double.compare(b.getRating(), a.getRating()));
+        }
+
+        filteredBars.setValue(result);
+    }
+
+    public LiveData<List<Bar>> getBars() { return filteredBars; }
+    public LiveData<List<Bar>> getFilteredBars() { return filteredBars; }
+    public LiveData<Bar> getSelectedBar() { return selectedBar; }
+    public LiveData<Boolean> getIsOffline() { return isOffline; }
 }
