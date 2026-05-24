@@ -9,21 +9,21 @@
         style="@style/TextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Filters" />
+        android:text="@string/filters_title" />
 
     <TextView
         style="@style/TextSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="Refine the bars you want to discover." />
+        android:text="@string/filters_subtitle" />
 
     <TextView
         style="@style/TextBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Bar type" />
+        android:text="@string/filter_bar_type" />
 
     <Spinner
         android:id="@+id/typeSpinner"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Minimum rating" />
+        android:text="@string/filter_minimum_rating" />
 
     <Spinner
         android:id="@+id/ratingSpinner"
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Distance" />
+        android:text="@string/filter_distance" />
 
     <Spinner
         android:id="@+id/distanceSpinner"
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Apply filters" />
+        android:text="@string/apply_filters" />
 
     <Button
         android:id="@+id/resetFiltersButton"
@@ -71,6 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Reset" />
+        android:text="@string/reset_filters" />
 
 </LinearLayout>
