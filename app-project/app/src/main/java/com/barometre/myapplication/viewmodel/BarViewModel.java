@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.barometre.myapplication.filters.FilterOptions;
 import com.barometre.myapplication.models.Bar;
-import com.barometre.myapplication.repositories.FakeRepository;
 import com.barometre.myapplication.repositories.IBarRepository;
 
 import java.util.Collections;
@@ -16,7 +15,7 @@ import java.util.List;
 public class BarViewModel extends ViewModel {
 
     // swap FakeRepository for actual repository later
-    private IBarRepository repository;
+    private IBarRepository repository = null;
 
     // all bars
     private final MutableLiveData<List<Bar>> bars = new MutableLiveData<>();
