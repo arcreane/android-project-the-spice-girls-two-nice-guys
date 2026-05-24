@@ -140,6 +140,8 @@ public class MainActivity extends AppCompatActivity
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
+                barViewModel.showBarsNearLocation(latitude, longitude, 3.0);
+
                 Toast.makeText(
                         MainActivity.this,
                         "Location found: " + latitude + ", " + longitude,

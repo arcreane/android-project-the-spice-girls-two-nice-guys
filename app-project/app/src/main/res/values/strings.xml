@@ -28,9 +28,4 @@
     <string name="settings_subtitle"> Customise your nightlife discovery experience </string>
     <string name="settings_dark_mode"> Dark neon mode </string>
 
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation(libs.google.material)
-    implementation(libs.androidx.appcompat)
-
 </resources>

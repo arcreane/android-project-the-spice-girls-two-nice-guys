@@ -27,11 +27,14 @@
     <item
         android:id="@+id/action_show_favorites"
         android:title="@string/menu_favourites"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+ />
 
     <!-- settings -->
     <item
         android:id="@+id/action_settings"
         android:title="@string/menu_settings"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
+
 </menu>
