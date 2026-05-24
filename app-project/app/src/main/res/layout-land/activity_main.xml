@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,13 +17,13 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <!-- offline banner -->
         <TextView
             android:id="@+id/tv_offline_banner"
             android:layout_width="match_parent"
@@ -36,11 +35,35 @@
             android:background="?attr/colorError"
             android:textColor="?attr/colorOnError" />
 
-        <FrameLayout
-            android:id="@+id/fragment_container_map"
+        <!-- Side-by-side containers -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- Map takes 60% of width -->
+            <FrameLayout
+                android:id="@+id/fragment_container_map"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3" />
+
+            <!-- Thin divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="?attr/colorOutline" />
+
+            <!-- Detail panel takes 40% — this container's existence signals landscape mode -->
+            <FrameLayout
+                android:id="@+id/fragment_container_detail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

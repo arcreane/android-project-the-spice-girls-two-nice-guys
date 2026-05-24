@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Baromètre</string>
+    <string name="offline_banner">Vous êtes hors ligne — données en cache affichées</string>
+    <string name="bar_image_description">Bar photo</string>
 </resources>
