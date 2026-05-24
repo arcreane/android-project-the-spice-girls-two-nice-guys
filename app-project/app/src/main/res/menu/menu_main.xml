@@ -5,25 +5,36 @@
     <!-- filter -->
     <item
         android:id="@+id/action_filter"
-        android:title="Filter"
+        android:title="@string/menu_filter"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_near_me"
+        android:title="@string/menu_bars_near_me"
+        android:icon="@android:drawable/ic_menu_mylocation"
+        app:showAsAction="ifRoom"
+
+        />
 
     <!-- sorts by rating -->
     <item
         android:id="@+id/action_sort_rating"
-        android:title="Sort by rating"
+        android:title="@string/menu_sort_by_rating"
         app:showAsAction="never" />
 
     <!-- favorites -->
     <item
         android:id="@+id/action_show_favorites"
-        android:title="Favorites"
-        app:showAsAction="never" />
+        android:title="@string/menu_favourites"
+        app:showAsAction="never"
+ />
 
     <!-- settings -->
     <item
         android:id="@+id/action_settings"
-        android:title="Settings"
-        app:showAsAction="never" />
+        android:title="@string/menu_settings"
+        app:showAsAction="never"
+        />
+
 </menu>

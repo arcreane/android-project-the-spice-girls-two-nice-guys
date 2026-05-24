@@ -9,21 +9,21 @@
         style="@style/TextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings" />
+        android:text="@string/settings_title" />
 
     <TextView
         style="@style/TextSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Customize your nightlife discovery experience." />
+        android:text="@string/settings_subtitle" />
 
     <Switch
         android:id="@+id/darkModeSwitch"
+        style="@style/TextBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Dark neon mode"
-        android:textColor="@color/colorTextPrimary" />
+        android:text="@string/settings_dark_mode" />
 
 </LinearLayout>
