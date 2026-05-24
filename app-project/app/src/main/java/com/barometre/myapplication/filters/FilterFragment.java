@@ -93,6 +93,11 @@ public class FilterFragment extends Fragment {
 
         filterViewModel.setSelectedFilters(options);
         barViewModel.applyFilterOptions(options);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .popBackStack();
+
     }
 
     private void resetFilters() {
