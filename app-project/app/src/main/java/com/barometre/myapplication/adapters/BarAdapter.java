@@ -27,6 +27,11 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.BarViewHolder> {
         this.listener = listener;
     }
 
+    public BarAdapter(List<Bar> initialBars, OnBarClickListener listener) {
+        this.listener = listener;
+        if (initialBars != null) this.bars = new ArrayList<>(initialBars);
+    }
+
     public void setBars(List<Bar> newBars) {
         bars = newBars != null ? newBars : new ArrayList<>();
         notifyDataSetChanged();
