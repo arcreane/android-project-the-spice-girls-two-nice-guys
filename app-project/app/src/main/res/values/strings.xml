@@ -4,6 +4,13 @@
 
     <string name="offline_banner">You are offline. Showing cached bars.</string>
     <string name="bar_image_description">Photo of the bar</string>
+    <string name="bars_near_me">Bars near me</string>
+
+    <string name="menu_filter">Filter</string>
+    <string name="menu_bars_near_me"> Bars near me </string>
+    <string name="menu_sort_by_rating">Sort by rating</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_settings">Settings</string>
 
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.11.0")

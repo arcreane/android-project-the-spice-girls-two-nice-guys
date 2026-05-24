@@ -108,6 +108,11 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
 
+        if (id == R.id.action_near_me) {
+            requestUserLocation();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
