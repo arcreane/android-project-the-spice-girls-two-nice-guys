@@ -1,7 +1,9 @@
 package com.barometre.myapplication.activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +24,9 @@ import com.barometre.myapplication.fragments.MapFragment;
 import com.barometre.myapplication.location.LocationHelper;
 import com.barometre.myapplication.location.LocationViewModel;
 import com.barometre.myapplication.models.Bar;
+import com.barometre.myapplication.receivers.ConnectivityReceiver;
 import com.barometre.myapplication.viewmodel.BarViewModel;
+
 
 public class MainActivity extends AppCompatActivity
         implements MapFragment.OnBarSelectedListener,
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity
 
     private boolean isLandscape;
     private TextView offlineBanner;
+
+    private ConnectivityReceiver connectivityReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,14 +223,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        // connectivityReceiver = new ConnectivityReceiver(barViewModel);
-        // IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        // registerReceiver(connectivityReceiver, filter);
+        if (connectivityReceiver == null) {
+            connectivityReceiver = new ConnectivityReceiver(barViewModel);
+            IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+            registerReceiver(connectivityReceiver, filter);
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        // if (connectivityReceiver != null) unregisterReceiver(connectivityReceiver);
+        if (connectivityReceiver != null) {
+            unregisterReceiver(connectivityReceiver);
+            connectivityReceiver = null;
+        }
     }
 }
