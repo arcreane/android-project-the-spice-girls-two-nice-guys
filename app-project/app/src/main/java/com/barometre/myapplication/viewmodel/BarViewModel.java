@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.barometre.myapplication.models.Bar;
 import com.barometre.myapplication.repositories.FakeRepository;
 import com.barometre.myapplication.repositories.IBarRepository;
+import com.barometre.myapplication.filters.FilterOptions;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +42,22 @@ public class BarViewModel extends ViewModel {
 
     public void selectBar(Bar bar){
         selectedBar.setValue(bar);
+    }
+
+    public void applyFilterOptions(FilterOptions options) {
+        if (options == null ) {
+            filteredBars.setValue(bars.getValue());
+            return;
+        }
+
+        List<String> tags = null;
+
+        if (options.getType() != null && !options.getType().equalsIgnoreCase("All")) {
+            tags = Collections.singletonList(options.getType());
+
+        }
+
+        applyFilters(null, tags, options.getMinimumRating());
     }
 
     public void setOfflineMode(boolean offline) {
