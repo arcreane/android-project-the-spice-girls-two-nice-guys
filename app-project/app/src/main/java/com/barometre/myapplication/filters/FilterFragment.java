@@ -14,10 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.barometre.myapplication.R;
+import com.barometre.myapplication.viewmodel.BarViewModel;
 
 public class FilterFragment extends Fragment {
 
     private FilterViewModel filterViewModel;
+
+    private BarViewModel barViewModel;
 
     private Spinner typeSpinner;
     private Spinner ratingSpinner;
@@ -50,6 +53,7 @@ public class FilterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         filterViewModel = new ViewModelProvider(requireActivity()).get(FilterViewModel.class);
+        barViewModel = new ViewModelProvider(requireActivity()).get(BarViewModel.class);
 
         typeSpinner = view.findViewById(R.id.typeSpinner);
         ratingSpinner = view.findViewById(R.id.ratingSpinner);
@@ -88,6 +92,12 @@ public class FilterFragment extends Fragment {
         );
 
         filterViewModel.setSelectedFilters(options);
+        barViewModel.applyFilterOptions(options);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .popBackStack();
+
     }
 
     private void resetFilters() {
@@ -96,6 +106,7 @@ public class FilterFragment extends Fragment {
         distanceSpinner.setSelection(0);
 
         filterViewModel.resetFilters();
+        barViewModel.applyFilterOptions(FilterOptions.defaultFilters());
     }
 
     private float parseRating(String value) {

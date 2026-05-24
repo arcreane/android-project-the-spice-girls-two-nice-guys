@@ -1,5 +1,32 @@
 <resources>
-    <string name="app_name">Baromètre</string>
-    <string name="offline_banner">Vous êtes hors ligne — données en cache affichées</string>
-    <string name="bar_image_description">Bar photo</string>
+
+    <string name="app_name">Barometre</string>
+
+    <string name="offline_banner">You are offline. Showing cached bars.</string>
+    <string name="bar_image_description">Photo of the bar</string>
+    <string name="bars_near_me">Bars near me</string>
+
+    <string name="menu_filter"> Filter </string>
+    <string name="filters_title"> Filters </string>
+
+    <string name="menu_bars_near_me"> Bars near me </string>
+    <string name="filters_subtitle"> Refine the bars you want to discover. </string>
+
+    <string name="filter_bar_type"> Bar type </string>
+    <string name="filter_minimum_rating"> Minimum rating </string>
+
+    <string name="filter_distance"> Distance </string>
+    <string name="apply_filters"> Apply filters </string>
+
+    <string name="reset_filters"> Reset </string>
+
+    <string name="menu_sort_by_rating">Sort by rating</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="settings_title"> Settings </string>
+    <string name="settings_subtitle"> Customise your nightlife discovery experience </string>
+    <string name="settings_dark_mode"> Dark neon mode </string>
+    <string name="favorites_empty">No favourites yet. Tap a bar and long-press to save it.</string>
+
 </resources>

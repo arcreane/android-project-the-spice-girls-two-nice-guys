@@ -15,7 +15,7 @@ import java.util.List;
 
 public class BarViewModel extends ViewModel {
 
-    private final IBarRepository repository = new FakeRepository();
+    private IBarRepository repository = new FakeRepository();
 
     private final MutableLiveData<List<Bar>> filteredBars = new MutableLiveData<>();
     private final MutableLiveData<Bar> selectedBar = new MutableLiveData<>();
@@ -24,6 +24,12 @@ public class BarViewModel extends ViewModel {
     private String searchQuery = "";
     private boolean sortByRatingEnabled = false;
     private FilterOptions activeFilters = FilterOptions.defaultFilters();
+
+    public void init(android.content.Context context) {
+        if (repository instanceof FakeRepository) {
+            repository = new com.barometre.myapplication.repositories.BarRepository(context);
+        }
+    }
 
     public void loadAllBars() {
         refresh();
@@ -77,6 +83,18 @@ public class BarViewModel extends ViewModel {
 
     public void applyFilters(String city, List<String> tags, double minRating) {
         filteredBars.setValue(repository.getFilteredBars(city, tags, minRating));
+    }
+
+    public void applyFilterOptions(FilterOptions options) {
+        if (options == null) {
+            setFilters(FilterOptions.defaultFilters());
+            return;
+        }
+        setFilters(options);
+    }
+
+    public void showBarsNearLocation(double latitude, double longitude, double radiusKm) {
+        filteredBars.setValue(repository.getBarsNearLocation(latitude, longitude, radiusKm));
     }
 
     private void refresh() {

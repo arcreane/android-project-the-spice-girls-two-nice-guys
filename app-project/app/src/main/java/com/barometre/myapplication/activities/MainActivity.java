@@ -1,20 +1,26 @@
 package com.barometre.myapplication.activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.barometre.myapplication.R;
+import com.barometre.myapplication.filters.FilterFragment;
 import com.barometre.myapplication.fragments.BarDetailFragment;
 import com.barometre.myapplication.fragments.BarListFragment;
 import com.barometre.myapplication.fragments.MapFragment;
+import com.barometre.myapplication.location.LocationHelper;
+import com.barometre.myapplication.location.LocationViewModel;
 import com.barometre.myapplication.models.Bar;
 import com.barometre.myapplication.viewmodel.BarViewModel;
 
@@ -23,6 +29,9 @@ public class MainActivity extends AppCompatActivity
                    BarListFragment.OnBarSelectedListener {
 
     private BarViewModel barViewModel;
+    private LocationViewModel locationViewModel;
+    private LocationHelper locationHelper;
+
     private boolean isLandscape;
     private TextView offlineBanner;
 
@@ -41,7 +50,11 @@ public class MainActivity extends AppCompatActivity
         isLandscape = findViewById(R.id.fragment_container_detail) != null;
 
         barViewModel = new ViewModelProvider(this).get(BarViewModel.class);
+        barViewModel.init(this);
         barViewModel.loadAllBars();
+
+        locationHelper = new LocationHelper(this);
+        locationViewModel = new ViewModelProvider(this).get(LocationViewModel.class);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -50,8 +63,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         barViewModel.getIsOffline().observe(this, isOffline -> {
-            if (isOffline) showOfflineBanner();
-            else hideOfflineBanner();
+            if (isOffline) {
+                showOfflineBanner();
+            } else {
+                hideOfflineBanner();
+            }
         });
     }
 
@@ -64,6 +80,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.action_sort_rating) {
             barViewModel.sortByRating();
             return true;
@@ -84,15 +101,79 @@ public class MainActivity extends AppCompatActivity
             showFilterPanel();
             return true;
         }
+        if (id == R.id.action_near_me) {
+            requestUserLocation();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
-    // Called when user taps a bar in BarListFragment
+    private void showFilterPanel() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_map, new FilterFragment())
+                .addToBackStack("filter")
+                .commit();
+    }
+
+    private void requestUserLocation() {
+        if (!locationHelper.hasLocationPermission()) {
+            locationHelper.requestLocationPermission(this);
+            return;
+        }
+
+        locationHelper.getLastKnownLocation(new LocationHelper.LocationCallback() {
+            @Override
+            public void onLocationReceived(Location location) {
+                locationViewModel.setUserLocation(location);
+
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                barViewModel.showBarsNearLocation(latitude, longitude, 3.0);
+
+                Toast.makeText(
+                        MainActivity.this,
+                        "Location found: " + latitude + ", " + longitude,
+                        Toast.LENGTH_LONG
+                ).show();
+            }
+
+            @Override
+            public void onLocationError(String message) {
+                Toast.makeText(
+                        MainActivity.this,
+                        message,
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LocationHelper.LOCATION_PERMISSION_REQUEST_CODE) {
+            if (locationHelper.hasLocationPermission()) {
+                requestUserLocation();
+            } else {
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     @Override
     public void onBarSelected(Bar bar) {
         barViewModel.selectBar(bar);
+
         if (isLandscape) {
-            getSupportFragmentManager().beginTransaction()
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .replace(R.id.fragment_container_detail, BarDetailFragment.newInstance(bar))
                     .commit();
         } else {
@@ -104,14 +185,6 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container_map, new MapFragment())
                 .addToBackStack("map")
-                .commit();
-    }
-
-    public void showFilterPanel() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container_map,
-                        new com.barometre.myapplication.filters.FilterFragment())
-                .addToBackStack("filter")
                 .commit();
     }
 
@@ -130,11 +203,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showOfflineBanner() {
-        if (offlineBanner != null) offlineBanner.setVisibility(View.VISIBLE);
+        if (offlineBanner != null) {
+            offlineBanner.setVisibility(View.VISIBLE);
+        }
     }
 
     public void hideOfflineBanner() {
-        if (offlineBanner != null) offlineBanner.setVisibility(View.GONE);
+        if (offlineBanner != null) {
+            offlineBanner.setVisibility(View.GONE);
+        }
     }
 
     @Override
