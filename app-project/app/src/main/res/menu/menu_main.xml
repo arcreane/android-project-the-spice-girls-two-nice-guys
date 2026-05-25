@@ -34,4 +34,9 @@
         android:title="Map view"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_show_list"
+        android:title="List view"
+        app:showAsAction="never" />
+
 </menu>

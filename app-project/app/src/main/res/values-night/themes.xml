@@ -26,9 +26,13 @@
 
         <!-- Material surfaces -->
         <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceSoft</item>
         <item name="colorOnSurface">@color/colorTextPrimary</item>
+        <item name="colorOnSurfaceVariant">@color/colorTextSecondary</item>
         <item name="colorOnPrimary">@color/colorBackground</item>
         <item name="colorOnSecondary">@color/colorTextPrimary</item>
+        <item name="colorOnError">@color/colorBackground</item>
+        <item name="colorOutline">@color/colorDivider</item>
 
         <!-- Default font -->
         <item name="android:fontFamily">sans</item>

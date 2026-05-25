@@ -44,10 +44,10 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:id="@+id/fragment_container_map"
+                android:id="@+id/fragment_container_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3" />
+                android:layout_weight="2" />
 
             <View
                 android:layout_width="1dp"
@@ -55,10 +55,10 @@
                 android:background="?attr/colorOutline" />
 
             <FrameLayout
-                android:id="@+id/fragment_container_detail"
+                android:id="@+id/fragment_container_map"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="3" />
 
         </LinearLayout>
 

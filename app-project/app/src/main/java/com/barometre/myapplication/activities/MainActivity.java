@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.barometre.myapplication.R;
@@ -27,6 +28,8 @@ import com.barometre.myapplication.models.Bar;
 import com.barometre.myapplication.receivers.ConnectivityReceiver;
 import com.barometre.myapplication.viewmodel.BarViewModel;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity
         implements MapFragment.OnBarSelectedListener,
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     private LocationHelper locationHelper;
 
     private boolean isLandscape;
+    private boolean hasDetailPane;
     private TextView offlineBanner;
 
     private ConnectivityReceiver connectivityReceiver;
@@ -53,7 +57,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         offlineBanner = findViewById(R.id.tv_offline_banner);
-        isLandscape = findViewById(R.id.fragment_container_detail) != null;
+        isLandscape = findViewById(R.id.fragment_container_list) != null;
+        hasDetailPane = findViewById(R.id.fragment_container_detail) != null;
 
         barViewModel = new ViewModelProvider(this).get(BarViewModel.class);
         barViewModel.init(this);
@@ -63,9 +68,15 @@ public class MainActivity extends AppCompatActivity
         locationViewModel = new ViewModelProvider(this).get(LocationViewModel.class);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_map, new BarListFragment())
-                    .commit();
+            if (isLandscape) {
+                showLandscapeSplitView();
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_map, new BarListFragment())
+                        .commit();
+            }
+        } else if (isLandscape) {
+            showLandscapeSplitView();
         }
 
         barViewModel.getIsOffline().observe(this, isOffline -> {
@@ -93,6 +104,10 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.action_show_map) {
             showMapView();
+            return true;
+        }
+        if (id == R.id.action_show_list) {
+            showListView();
             return true;
         }
         if (id == R.id.action_show_favorites) {
@@ -135,13 +150,16 @@ public class MainActivity extends AppCompatActivity
 
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
+                double radiusKm = 3.0;
 
-                barViewModel.showBarsNearLocation(latitude, longitude, 3.0);
+                barViewModel.showBarsNearLocation(latitude, longitude, radiusKm);
+                List<Bar> nearbyBars = barViewModel.getFilteredBars().getValue();
+                int nearbyCount = nearbyBars != null ? nearbyBars.size() : 0;
 
                 Toast.makeText(
                         MainActivity.this,
-                        "Location found: " + latitude + ", " + longitude,
-                        Toast.LENGTH_LONG
+                        "Showing " + nearbyCount + " bars within " + (int) radiusKm + " km",
+                        Toast.LENGTH_SHORT
                 ).show();
             }
 
@@ -177,7 +195,7 @@ public class MainActivity extends AppCompatActivity
     public void onBarSelected(Bar bar) {
         barViewModel.selectBar(bar);
 
-        if (isLandscape) {
+        if (hasDetailPane) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container_detail, BarDetailFragment.newInstance(bar))
@@ -188,10 +206,46 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showMapView() {
+        if (isLandscape) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container_map, new MapFragment())
+                    .commit();
+            return;
+        }
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container_map, new MapFragment())
                 .addToBackStack("map")
                 .commit();
+    }
+
+    public void showListView() {
+        if (isLandscape) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container_list, new BarListFragment())
+                    .commit();
+            return;
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_map, new BarListFragment())
+                .addToBackStack("list")
+                .commit();
+    }
+
+    private void showLandscapeSplitView() {
+        Fragment currentMapPane = getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container_map);
+
+        androidx.fragment.app.FragmentTransaction transaction =
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_list, new BarListFragment());
+
+        if (!(currentMapPane instanceof MapFragment)) {
+            transaction.replace(R.id.fragment_container_map, new MapFragment());
+        }
+
+        transaction.commit();
     }
 
     public void navigateToBarDetail(Bar bar) {
