@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.barometre.myapplication.repositories.BarRepository;
 import com.bumptech.glide.Glide;
 import com.barometre.myapplication.databinding.FragmentBarDetailBinding;
 import com.barometre.myapplication.models.Bar;
@@ -113,6 +114,7 @@ public class BarDetailFragment extends Fragment {
         }
 
         binding.btnShareBar.setOnClickListener(v -> shareBar());
+        binding.btnAddFavorite.setOnClickListener(v -> addToFavorites());
     }
 
     private void openWebsite() {
@@ -177,9 +179,11 @@ public class BarDetailFragment extends Fragment {
     }
     private void addToFavorites() {
         if (bar == null) return;
-        // TODO: replace with FavoritesRepository.getInstance(requireContext()).addFavorite(bar);
+        BarRepository repo = new BarRepository(requireContext());
+        repo.addFavorite(bar.getId());
+        bar.setFavorite(true);
         Toast.makeText(requireContext(),
-                bar.getName() + " added to favorites",
+                bar.getName() + " added to favourites",
                 Toast.LENGTH_SHORT).show();
     }
 }
