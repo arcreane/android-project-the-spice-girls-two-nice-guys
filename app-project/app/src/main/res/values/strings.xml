@@ -20,6 +20,8 @@
 
     <string name="reset_filters"> Reset </string>
 
+    <string name="map_api_key"> google maps api key </string>
+
     <string name="menu_sort_by_rating">Sort by rating</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_settings">Settings</string>
