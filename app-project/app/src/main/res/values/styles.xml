@@ -5,7 +5,6 @@
 
     <style name="ScreenRoot">
         <item name="android:background">@color/colorBackground</item>
-        <item name="android:padding">16dp</item>
     </style>
 
     <style name="CardSurface">
@@ -13,7 +12,22 @@
         <item name="android:padding">16dp</item>
     </style>
 
+    <style name="Widget.TheSpice.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@color/colorPopupBackground</item>
+        <item name="android:itemTextAppearance">@style/TextAppearance.TheSpice.PopupMenu</item>
+    </style>
+
+    <style name="TextAppearance.TheSpice.PopupMenu" parent="TextAppearance.AppCompat.Widget.PopupMenu.Large">
+        <item name="android:textColor">@color/colorPopupText</item>
+    </style>
+
     <!-- Text styles -->
+    <style name="TextAppearance.TheSpice.ToolbarTitle"
+        parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
 
     <style name="TextTitle">
         <item name="android:textColor">@color/colorTextPrimary</item>
@@ -37,7 +51,6 @@
     </style>
 
     <!-- Neon elements -->
-
     <style name="NeonPrimaryText">
         <item name="android:textColor">@color/colorPrimaryGlow</item>
         <item name="android:textSize">14sp</item>
@@ -51,7 +64,6 @@
     </style>
 
     <!-- Buttons -->
-
     <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/colorPrimary</item>
         <item name="android:textColor">@color/colorBackground</item>
@@ -65,12 +77,32 @@
     </style>
 
     <!-- Chips / tags -->
-
     <style name="BarTagChip" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/colorChipBackground</item>
         <item name="android:textColor">@color/colorChipText</item>
         <item name="chipStrokeColor">@color/colorPrimaryDark</item>
         <item name="chipStrokeWidth">1dp</item>
     </style>
+
+
+    <!-- Popup -->
+    <style name="ThemeOverlay.TheSpice.Popup" parent="ThemeOverlay.AppCompat">
+        <item name="android:colorBackground">@color/colorPopupBackground</item>
+        <item name="android:popupBackground">@color/colorPopupBackground</item>
+        <item name="android:textColorPrimary">@color/colorPopupText</item>
+        <item name="android:textColorSecondary">@color/colorPopupText</item>
+        <item name="colorControlNormal">@color/colorPopupText</item>
+    </style>
+
+
+    <style name="ThemeOverlay.TheSpice.Toolbar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="colorControlNormal">@color/colorTextPrimary</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+    </style>
+
+
+
+
 
 </resources>

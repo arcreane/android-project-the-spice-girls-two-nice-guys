@@ -31,12 +31,12 @@
 
     <item
         android:id="@+id/action_show_map"
-        android:title="Map view"
+        android:title="@string/map_view"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_show_list"
-        android:title="List view"
+        android:title="@string/list_view"
         app:showAsAction="never" />
 
 </menu>
