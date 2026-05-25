@@ -1,15 +1,14 @@
 package com.barometre.myapplication.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,17 +16,15 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.barometre.myapplication.databinding.FragmentBarDetailBinding;
 import com.barometre.myapplication.models.Bar;
+import com.barometre.myapplication.repositories.BarRepository;
 
 public class BarDetailFragment extends Fragment {
+
     private static final String ARG_BAR = "bar";
 
-    private static final int CONTEXT_ADD_FAVORITE = 1;
-    private static final int CONTEXT_SHARE        = 2;
-
     private Bar bar;
-
     private FragmentBarDetailBinding binding;
-
+    private BarRepository barRepository;
 
     public static BarDetailFragment newInstance(Bar bar) {
         BarDetailFragment fragment = new BarDetailFragment();
@@ -40,10 +37,10 @@ public class BarDetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             bar = (Bar) getArguments().getSerializable(ARG_BAR);
         }
+        barRepository = new BarRepository(requireContext());
     }
 
     @Override
@@ -60,7 +57,20 @@ public class BarDetailFragment extends Fragment {
         if (bar == null) return;
 
         bindViews();
-        registerForContextMenu(binding.detailRootCard);
+
+        binding.detailRootCard.setOnLongClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(bar.getName())
+                    .setItems(new String[]{"Add to Favorites", "Share"}, (dialog, which) -> {
+                        if (which == 0) {
+                            addToFavorites();
+                        } else {
+                            shareBar();
+                        }
+                    })
+                    .show();
+            return true;
+        });
     }
 
     @Override
@@ -68,8 +78,8 @@ public class BarDetailFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-    private void bindViews() {
 
+    private void bindViews() {
         String imageUrl = "https://loremflickr.com/320/240/bar,pub,cocktail?lock=" + bar.getId();
         Glide.with(this)
                 .load(imageUrl)
@@ -98,6 +108,7 @@ public class BarDetailFragment extends Fragment {
         } else {
             binding.tvDetailHours.setVisibility(View.GONE);
         }
+
         if (bar.getWebsite() != null && !bar.getWebsite().isEmpty()) {
             binding.btnOpenWebsite.setVisibility(View.VISIBLE);
             binding.btnOpenWebsite.setOnClickListener(v -> openWebsite());
@@ -137,6 +148,7 @@ public class BarDetailFragment extends Fragment {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fallback)));
         }
     }
+
     private void shareBar() {
         String shareText = "📍 " + bar.getName() + "\n"
                 + bar.getFullAddress() + "\n"
@@ -154,32 +166,18 @@ public class BarDetailFragment extends Fragment {
         startActivity(intent);
     }
 
-    @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu,
-                                    @NonNull View v,
-                                    @Nullable ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle(bar != null ? bar.getName() : "Options");
-        menu.add(Menu.NONE, CONTEXT_ADD_FAVORITE, Menu.NONE, "Add to Favorites");
-        menu.add(Menu.NONE, CONTEXT_SHARE,        Menu.NONE, "Share");
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == CONTEXT_ADD_FAVORITE) {
-            addToFavorites();
-            return true;
-        } else if (item.getItemId() == CONTEXT_SHARE) {
-            shareBar();
-            return true;
-        }
-        return super.onContextItemSelected(item);
-    }
     private void addToFavorites() {
         if (bar == null) return;
-        // TODO: replace with FavoritesRepository.getInstance(requireContext()).addFavorite(bar);
-        Toast.makeText(requireContext(),
-                bar.getName() + " added to favorites",
-                Toast.LENGTH_SHORT).show();
+        if (barRepository.isFavorite(bar.getId())) {
+            barRepository.removeFavorite(bar.getId());
+            Toast.makeText(requireContext(),
+                    bar.getName() + " removed from favorites",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            barRepository.addFavorite(bar.getId());
+            Toast.makeText(requireContext(),
+                    bar.getName() + " added to favorites !",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }
