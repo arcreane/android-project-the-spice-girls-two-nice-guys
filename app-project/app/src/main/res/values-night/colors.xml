@@ -8,6 +8,7 @@
     <color name="colorSurface">#14100D</color>
     <color name="colorSurfaceSoft">#211912</color>
     <color name="colorSurfaceStrong">#302015</color>
+    <color name="colorPopupDark">#2A211D</color>
 
     <!-- Text -->
     <color name="colorTextPrimary">#FFF7EA</color>
@@ -35,5 +36,8 @@
     <color name="colorDivider">#352820</color>
     <color name="colorChipBackground">#26360B</color>
     <color name="colorChipText">#D6FF54</color>
+
+    <color name="colorPopupBackground">#211912</color>
+    <color name="colorPopupText">#FFF7EA</color>
 
 </resources>

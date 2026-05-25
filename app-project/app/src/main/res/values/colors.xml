@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Light mode: foggy daytime version of the neon bar identity -->
+    <!-- Light mode: warm daytime bar / tobacco lounge atmosphere -->
 
     <!-- Base surfaces -->
-    <color name="colorBackground">#F4F0E8</color>
-    <color name="colorSurface">#FFFDF8</color>
-    <color name="colorSurfaceSoft">#EAE2D7</color>
-    <color name="colorSurfaceStrong">#D8CFC2</color>
+    <color name="colorBackground">#EFE6D8</color>
+    <color name="colorSurface">#F8F1E7</color>
+    <color name="colorSurfaceSoft">#E3D2C0</color>
+    <color name="colorSurfaceStrong">#CBB39D</color>
 
     <!-- Text -->
-    <color name="colorTextPrimary">#14110F</color>
-    <color name="colorTextSecondary">#5F5750</color>
-    <color name="colorTextMuted">#8B8177</color>
+    <color name="colorTextPrimary">#4A3126</color>
+    <color name="colorTextSecondary">#7A665A</color>
+    <color name="colorTextMuted">#9A897D</color>
 
-    <!-- Neon identity accents -->
-    <color name="colorPrimary">#6EA800</color>
-    <color name="colorPrimaryDark">#2C4300</color>
-    <color name="colorPrimaryGlow">#B7FF1A</color>
+    <!-- Bar identity accents -->
+    <color name="colorPrimary">#5D7F12</color>
+    <color name="colorPrimaryDark">#2F4308</color>
+    <color name="colorPrimaryGlow">#6D8F18</color>
 
-    <color name="colorSecondary">#E7541E</color>
-    <color name="colorSecondaryGlow">#FF7A1A</color>
+    <color name="colorSecondary">#C85A22</color>
+    <color name="colorSecondaryGlow">#E4772B</color>
 
-    <color name="colorTertiary">#174C9F</color>
-    <color name="colorTertiaryGlow">#36C8FF</color>
+    <color name="colorTertiary">#3A4E8F</color>
+    <color name="colorTertiaryGlow">#4C6EDB</color>
 
     <!-- UI states -->
-    <color name="colorFavorite">#FF365E</color>
-    <color name="colorRating">#FFB84D</color>
-    <color name="colorSuccess">#3B8C4A</color>
-    <color name="colorError">#B3261E</color>
+    <color name="colorFavorite">#C83E55</color>
+    <color name="colorRating">#D88A22</color>
+    <color name="colorSuccess">#4F8A4E</color>
+    <color name="colorError">#A5402F</color>
 
     <!-- Map/list helpers -->
-    <color name="colorDivider">#D8CFC2</color>
-    <color name="colorChipBackground">#E9F5D3</color>
-    <color name="colorChipText">#253500</color>
+    <color name="colorDivider">#CDBBAA</color>
+    <color name="colorChipBackground">#E5EDC8</color>
+    <color name="colorChipText">#385000</color>
+
+    <!-- Popup -->
+    <color name="colorPopupBackground">#EADBCB</color>
+    <color name="colorPopupText">#4A3126</color>
 
 </resources>

@@ -23,6 +23,11 @@
         <!-- Text -->
         <item name="android:textColorPrimary">@color/colorTextPrimary</item>
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:popupBackground">@color/colorPopupDark</item>
+
+        <item name="popupMenuStyle">@style/Widget.TheSpice.PopupMenu</item>
+        <item name="android:popupMenuStyle">@style/Widget.TheSpice.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.TheSpice.PopupMenu</item>
 
         <!-- Material surfaces -->
         <item name="colorSurface">@color/colorSurface</item>

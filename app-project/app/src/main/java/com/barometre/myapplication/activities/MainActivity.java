@@ -28,6 +28,9 @@ import com.barometre.myapplication.models.Bar;
 import com.barometre.myapplication.receivers.ConnectivityReceiver;
 import com.barometre.myapplication.viewmodel.BarViewModel;
 
+import android.content.SharedPreferences;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import java.util.List;
 
 
@@ -47,6 +50,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = getSharedPreferences("app_settings", MODE_PRIVATE);
+        boolean isDarkMode = prefs.getBoolean("dark_mode", false);
+
+        AppCompatDelegate.setDefaultNightMode(
+                isDarkMode
+                        ? AppCompatDelegate.MODE_NIGHT_YES
+                        : AppCompatDelegate.MODE_NIGHT_NO
+        );
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
