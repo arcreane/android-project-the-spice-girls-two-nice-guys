@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_filter_type"
+        android:title="Filter by type"
+        app:showAsAction="never">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/filter_all" android:title="All" android:checked="true" />
+                <item android:id="@+id/filter_cocktail" android:title="Cocktail" />
+                <item android:id="@+id/filter_wine" android:title="Wine" />
+                <item android:id="@+id/filter_beer" android:title="Beer" />
+                <item android:id="@+id/filter_pub" android:title="Pub" />
+                <item android:id="@+id/filter_rooftop" android:title="Rooftop" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

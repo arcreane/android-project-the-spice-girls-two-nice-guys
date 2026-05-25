@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.barometre.myapplication.R;
 import com.barometre.myapplication.viewmodel.BarViewModel;
+import com.barometre.myapplication.location.LocationViewModel;
 import com.barometre.myapplication.models.Bar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,6 +38,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
     private BarViewModel barViewModel;
+    private LocationViewModel locationViewModel;
     private OnBarSelectedListener listener;
 
     private final Map<Marker, Bar> markerBarMap = new HashMap<>();
@@ -70,6 +72,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mapFragment.getMapAsync(this);
         }
         barViewModel = new ViewModelProvider(requireActivity()).get(BarViewModel.class);
+        locationViewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
     }
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -113,12 +116,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        // observe user location once added to barviewmodel
-        // barViewModel.getUserLocation().observe(getViewLifecycleOwner(), location -> {
-        //     if (location != null) {
-        //         showUserLocationPin(location.getLatitude(), location.getLongitude());
-        //     }
-        // });
+        // Observe user location from LocationViewModel
+        locationViewModel.getUserLocation().observe(getViewLifecycleOwner(), location -> {
+            if (location != null) {
+                showUserLocationPin(location.getLatitude(), location.getLongitude());
+            }
+        });
     }
 
     private void addMarkersToMap(List<Bar> bars) {
