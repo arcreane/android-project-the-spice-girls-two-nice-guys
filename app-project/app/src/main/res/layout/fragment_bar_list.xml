@@ -34,13 +34,19 @@
 
     <TextView
         android:id="@+id/activeFilterLabel"
-        style="@style/NeonPrimaryText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:textSize="12sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorChipBackground"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:textColor="@color/colorChipText"
+        android:textSize="13sp"
+        android:textStyle="bold"
         android:visibility="gone" />
 
     <FrameLayout
@@ -61,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="No bars found"
+            android:text="@string/no_bars_found"
             android:visibility="gone" />
 
     </FrameLayout>

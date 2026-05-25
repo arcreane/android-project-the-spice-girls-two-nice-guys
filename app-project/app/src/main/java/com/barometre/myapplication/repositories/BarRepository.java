@@ -37,6 +37,7 @@ public class BarRepository implements IBarRepository {
                 getString(cursor, COLUMN_PHONE),
                 getString(cursor, COLUMN_WEBSITE),
                 getString(cursor, COLUMN_OPENING_HOURS),
+                getString(cursor, COLUMN_TYPE),
                 getDouble(cursor, COLUMN_LATITUDE),
                 getDouble(cursor, COLUMN_LONGITUDE),
                 getDouble(cursor, COLUMN_RATING),

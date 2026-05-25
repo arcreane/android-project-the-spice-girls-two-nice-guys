@@ -22,8 +22,6 @@
 
     <string name="map_api_key">google maps api key</string>
 
-    <string name="map_api_key"> google maps api key </string>
-
     <string name="menu_sort_by_rating">Sort by rating</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_settings">Settings</string>
@@ -43,5 +41,16 @@
     <string name="settings_dark_mode">Dark neon mode</string>
     <string name="favorites_empty">No favourites yet. Tap a bar and long-press to save it.</string>
     <string name="add_to_favourites">Add to Favourites</string>
+
+    <string name="placeholder_bar_name">bar name</string>
+    <string name="no_bars_found">No bars found :(</string>
+
+    <string name="placeholder_rating">Rating</string>
+    <string name="label_address">Address</string>
+    <string name="placeholder_address">Address</string>
+    <string name="label_opening_hours">Opening Hours</string>
+    <string name="btn_open_website">Open Website</string>
+    <string name="btn_get_directions">Get Directions</string>
+    <string name="btn_share">Share</string>
 
 </resources>

@@ -137,7 +137,7 @@ public class BarListFragment extends Fragment {
         if ("All".equals(type)) {
             binding.activeFilterLabel.setVisibility(View.GONE);
         } else {
-            binding.activeFilterLabel.setText("Type: " + type);
+            binding.activeFilterLabel.setText(type);
             binding.activeFilterLabel.setVisibility(View.VISIBLE);
         }
     }

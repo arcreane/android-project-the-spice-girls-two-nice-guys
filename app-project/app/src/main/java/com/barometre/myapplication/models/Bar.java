@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Core data model for a bar.
  * Extended with rating, tags, and photoUrl.
@@ -20,6 +21,8 @@ public class Bar implements Serializable {
     private String phone;
     private String website;
     private String openingHours;
+
+    private String type;
     private double latitude;
     private double longitude;
 
@@ -40,6 +43,7 @@ public class Bar implements Serializable {
                String phone,
                String website,
                String openingHours,
+               String type,
                double latitude,
                double longitude,
                double rating,
@@ -55,6 +59,7 @@ public class Bar implements Serializable {
         this.phone = phone;
         this.website = website;
         this.openingHours = openingHours;
+        this.type = type;
         this.latitude = latitude;
         this.longitude = longitude;
 
@@ -91,6 +96,14 @@ public class Bar implements Serializable {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getHouseNumber() {

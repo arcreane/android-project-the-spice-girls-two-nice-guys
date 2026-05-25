@@ -107,10 +107,23 @@ public class BarViewModel extends ViewModel {
         if (hasSearch) {
             result = repository.searchBarsByName(searchQuery);
         } else if (hasTypeFilter || hasRatingFilter) {
-            List<String> tags = hasTypeFilter
-                    ? Collections.singletonList(activeFilters.getType())
-                    : null;
-            result = repository.getFilteredBars(null, tags, activeFilters.getMinimumRating());
+            List<Bar> allBars = repository.getAllBars();
+            result = new ArrayList<>();
+
+            for (Bar bar : allBars) {
+                boolean matchesType =
+                        !hasTypeFilter
+                                || (bar.getType() != null
+                                && bar.getType().equalsIgnoreCase(activeFilters.getType()));
+
+                boolean matchesRating =
+                        !hasRatingFilter
+                                || bar.getRating() >= activeFilters.getMinimumRating();
+
+                if (matchesType && matchesRating) {
+                    result.add(bar);
+                }
+            }
         } else {
             result = repository.getAllBars();
         }

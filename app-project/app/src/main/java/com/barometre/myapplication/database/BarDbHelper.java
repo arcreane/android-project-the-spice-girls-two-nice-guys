@@ -19,7 +19,7 @@ public class BarDbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "BarDbHelper";
     private static final String DATABASE_NAME = "barometre.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private final Context context;
 
     public static final String TABLE_BARS = "bars";
@@ -29,6 +29,8 @@ public class BarDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_HOUSE_NUMBER = "house_number";
     public static final String COLUMN_POSTCODE = "postcode";
     public static final String COLUMN_CITY = "city";
+
+    public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_PHONE = "phone";
     public static final String COLUMN_WEBSITE = "website";
     public static final String COLUMN_OPENING_HOURS = "opening_hours";
@@ -58,6 +60,7 @@ public class BarDbHelper extends SQLiteOpenHelper {
                 + COLUMN_PHONE + " TEXT, "
                 + COLUMN_WEBSITE + " TEXT, "
                 + COLUMN_OPENING_HOURS + " TEXT, "
+                + COLUMN_TYPE + " TEXT, "
                 + COLUMN_LATITUDE + " REAL, "
                 + COLUMN_LONGITUDE + " REAL, "
                 + COLUMN_RATING + " REAL, "
@@ -111,6 +114,7 @@ public class BarDbHelper extends SQLiteOpenHelper {
                 values.put(COLUMN_PHONE, obj.optString("phone", ""));
                 values.put(COLUMN_WEBSITE, obj.optString("website", ""));
                 values.put(COLUMN_OPENING_HOURS, obj.optString("opening_hours", ""));
+                values.put(COLUMN_TYPE, obj.optString("type", "Bar"));
                 values.put(COLUMN_LATITUDE, obj.optDouble("latitude", 0.0));
                 values.put(COLUMN_LONGITUDE, obj.optDouble("longitude", 0.0));
                 values.put(COLUMN_RATING, obj.optDouble("rating", 4.0));
