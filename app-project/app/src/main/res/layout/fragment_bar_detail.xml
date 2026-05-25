@@ -147,6 +147,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/btn_share"/>
 
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:id="@+id/btn_add_favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/add_to_favourites" />
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

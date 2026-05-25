@@ -20,6 +20,8 @@
 
     <string name="reset_filters"> Reset </string>
 
+    <string name="map_api_key"> google maps api key </string>
+
     <string name="menu_sort_by_rating">Sort by rating</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_settings">Settings</string>
@@ -28,14 +30,6 @@
     <string name="settings_subtitle"> Customise your nightlife discovery experience </string>
     <string name="settings_dark_mode"> Dark neon mode </string>
     <string name="favorites_empty">No favourites yet. Tap a bar and long-press to save it.</string>
-
-    <string name="label_address">ADDRESS</string>
-    <string name="label_opening_hours">OPENING HOURS</string>
-    <string name="placeholder_bar_name">Bar Name</string>
-    <string name="placeholder_address">123 Rue de la Paix, 75001 Paris</string>
-    <string name="placeholder_rating">0.0 / 5</string>
-    <string name="btn_open_website">Open Website</string>
-    <string name="btn_get_directions">Get Directions</string>
-    <string name="btn_share">Share</string>
+    <string name="add_to_favourites">Add to Favourites</string>
 
 </resources>

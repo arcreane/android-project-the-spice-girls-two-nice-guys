@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.barometre.myapplication.repositories.BarRepository;
 import com.bumptech.glide.Glide;
 import com.barometre.myapplication.databinding.FragmentBarDetailBinding;
 import com.barometre.myapplication.models.Bar;
@@ -124,6 +125,7 @@ public class BarDetailFragment extends Fragment {
         }
 
         binding.btnShareBar.setOnClickListener(v -> shareBar());
+        binding.btnAddFavorite.setOnClickListener(v -> addToFavorites());
     }
 
     private void openWebsite() {
@@ -168,16 +170,11 @@ public class BarDetailFragment extends Fragment {
 
     private void addToFavorites() {
         if (bar == null) return;
-        if (barRepository.isFavorite(bar.getId())) {
-            barRepository.removeFavorite(bar.getId());
-            Toast.makeText(requireContext(),
-                    bar.getName() + " removed from favorites",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            barRepository.addFavorite(bar.getId());
-            Toast.makeText(requireContext(),
-                    bar.getName() + " added to favorites !",
-                    Toast.LENGTH_SHORT).show();
-        }
+        BarRepository repo = new BarRepository(requireContext());
+        repo.addFavorite(bar.getId());
+        bar.setFavorite(true);
+        Toast.makeText(requireContext(),
+                bar.getName() + " added to favourites",
+                Toast.LENGTH_SHORT).show();
     }
 }
