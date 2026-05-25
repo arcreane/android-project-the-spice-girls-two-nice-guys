@@ -20,6 +20,8 @@
 
     <string name="reset_filters"> Reset </string>
 
+    <string name="map_api_key"> google maps api key </string>
+
     <string name="menu_sort_by_rating">Sort by rating</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_settings">Settings</string>
@@ -28,5 +30,6 @@
     <string name="settings_subtitle"> Customise your nightlife discovery experience </string>
     <string name="settings_dark_mode"> Dark neon mode </string>
     <string name="favorites_empty">No favourites yet. Tap a bar and long-press to save it.</string>
+    <string name="add_to_favourites">Add to Favourites</string>
 
 </resources>

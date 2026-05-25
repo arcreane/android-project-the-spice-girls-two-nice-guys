@@ -131,6 +131,14 @@ public class BarRepository implements IBarRepository {
                 new String[]{id},
                 null, null, null, "1");
         List<Bar> result = collectAll(cursor);
+
+        if (!result.isEmpty()) {
+            SQLiteDatabase wdb = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_LAST_VIEWED, System.currentTimeMillis());
+            wdb.update(TABLE_BARS, values, COLUMN_ID + " = ?", new String[]{id});
+        }
+
         return result.isEmpty() ? null : result.get(0);
     }
 
@@ -268,5 +276,16 @@ public class BarRepository implements IBarRepository {
         }
 
         return results;
+    }
+
+    public List<Bar> getRecentlyViewedBars(int limit) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                TABLE_BARS, null,
+                COLUMN_LAST_VIEWED + " > 0",   // only bars that have been opened
+                null, null, null,
+                COLUMN_LAST_VIEWED + " DESC",  // most recent first
+                String.valueOf(limit));
+        return collectAll(cursor);
     }
 }
