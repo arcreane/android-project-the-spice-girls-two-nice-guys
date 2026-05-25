@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_sort_rating"
-        android:title="Sort by rating"
-        android:checkable="true"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_filter_type"
         android:title="Filter by type"
         app:showAsAction="never">
