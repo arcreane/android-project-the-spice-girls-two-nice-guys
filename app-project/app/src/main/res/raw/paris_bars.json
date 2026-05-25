@@ -13,6 +13,7 @@
     "latitude": 48.8658464,
     "rating": 4.0,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -29,6 +30,7 @@
     "latitude": 48.8676561,
     "rating": 4.1,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -45,6 +47,7 @@
     "latitude": 48.8688144,
     "rating": 4.2,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -61,6 +64,7 @@
     "latitude": 48.8799811,
     "rating": 4.3,
     "tags": "Paris • Bar • Chilling",
+    "type": "Bar",
     "photo_url": ""
   },
   {
@@ -77,6 +81,7 @@
     "latitude": 48.8501884,
     "rating": 4.4,
     "tags": "Paris • Bar • Chilling",
+    "type": "Bar",
     "photo_url": ""
   },
   {
@@ -93,6 +98,7 @@
     "latitude": 48.8738228,
     "rating": 4.5,
     "tags": "Paris • Bar • Chilling",
+    "type": "Bar",
     "photo_url": ""
   },
   {
@@ -109,6 +115,7 @@
     "latitude": 48.8831829,
     "rating": 4.6,
     "tags": "Paris • Bar • Chilling",
+    "type": "Bar",
     "photo_url": ""
   },
   {
@@ -125,6 +132,7 @@
     "latitude": 48.875855,
     "rating": 4.7,
     "tags": "Paris • Bar • Chilling",
+    "type": "Bar",
     "photo_url": ""
   },
   {
@@ -141,6 +149,7 @@
     "latitude": 48.8407376,
     "rating": 4.8,
     "tags": "Paris • Bar • Chilling",
+    "type": "Rooftop",
     "photo_url": ""
   },
   {
@@ -157,6 +166,7 @@
     "latitude": 48.8527026,
     "rating": 4.9,
     "tags": "Paris • Bar • Chilling",
+    "type": "Rooftop",
     "photo_url": ""
   },
   {
@@ -173,6 +183,7 @@
     "latitude": 48.8668594,
     "rating": 4.0,
     "tags": "Paris • Bar • Chilling",
+    "type": "Rooftop",
     "photo_url": ""
   },
   {
@@ -189,6 +200,7 @@
     "latitude": 48.8648418,
     "rating": 4.1,
     "tags": "Paris • Bar • Chilling",
+    "type": "Rooftop",
     "photo_url": ""
   },
   {
@@ -205,6 +217,7 @@
     "latitude": 48.8601378,
     "rating": 4.2,
     "tags": "Paris • Bar • Chilling",
+    "type": "Rooftop",
     "photo_url": ""
   },
   {
@@ -221,6 +234,7 @@
     "latitude": 48.8714461,
     "rating": 4.3,
     "tags": "Paris • Bar • Chilling",
+    "type": "Rooftop",
     "photo_url": ""
   },
   {
@@ -237,6 +251,7 @@
     "latitude": 48.8607815,
     "rating": 4.4,
     "tags": "Paris • Bar • Chilling",
+    "type": "Rooftop",
     "photo_url": ""
   },
   {
@@ -253,6 +268,7 @@
     "latitude": 48.8835848,
     "rating": 4.5,
     "tags": "Paris • Bar • Chilling",
+    "type": "Cocktail",
     "photo_url": ""
   },
   {
@@ -269,6 +285,7 @@
     "latitude": 48.8547583,
     "rating": 4.6,
     "tags": "Paris • Bar • Chilling",
+    "type": "Cocktail",
     "photo_url": ""
   },
   {
@@ -285,6 +302,7 @@
     "latitude": 48.866505,
     "rating": 4.7,
     "tags": "Paris • Bar • Chilling",
+    "type": "Cocktail",
     "photo_url": ""
   },
   {
@@ -301,6 +319,7 @@
     "latitude": 48.842986,
     "rating": 4.8,
     "tags": "Paris • Bar • Chilling",
+    "type": "Cocktail",
     "photo_url": ""
   },
   {
@@ -317,6 +336,7 @@
     "latitude": 48.8708114,
     "rating": 4.9,
     "tags": "Paris • Bar • Chilling",
+    "type": "Cocktail",
     "photo_url": ""
   },
   {
@@ -333,6 +353,7 @@
     "latitude": 48.8837552,
     "rating": 4.0,
     "tags": "Paris • Bar • Chilling",
+    "type": "Cocktail",
     "photo_url": ""
   },
   {
@@ -349,6 +370,7 @@
     "latitude": 48.8721053,
     "rating": 4.1,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -365,6 +387,7 @@
     "latitude": 48.8599164,
     "rating": 4.2,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -413,6 +436,7 @@
     "latitude": 48.8816183,
     "rating": 4.5,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -429,6 +453,7 @@
     "latitude": 48.8680958,
     "rating": 4.6,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -445,6 +470,7 @@
     "latitude": 48.8820437,
     "rating": 4.7,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -461,6 +487,7 @@
     "latitude": 48.8553677,
     "rating": 4.8,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -477,6 +504,7 @@
     "latitude": 48.8775051,
     "rating": 4.9,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -493,6 +521,7 @@
     "latitude": 48.8897319,
     "rating": 4.0,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -509,6 +538,7 @@
     "latitude": 48.8591237,
     "rating": 4.1,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -525,6 +555,7 @@
     "latitude": 48.8896871,
     "rating": 4.2,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -541,6 +572,7 @@
     "latitude": 48.8355396,
     "rating": 4.3,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -557,6 +589,7 @@
     "latitude": 48.8629197,
     "rating": 4.4,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -573,6 +606,7 @@
     "latitude": 48.8670372,
     "rating": 4.5,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -589,6 +623,7 @@
     "latitude": 48.8669328,
     "rating": 4.6,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -605,6 +640,7 @@
     "latitude": 48.8664684,
     "rating": 4.7,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -621,6 +657,7 @@
     "latitude": 48.8829761,
     "rating": 4.8,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -637,6 +674,7 @@
     "latitude": 48.864912,
     "rating": 4.9,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -653,6 +691,7 @@
     "latitude": 48.8566,
     "rating": 4.0,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -669,6 +708,7 @@
     "latitude": 48.8675526,
     "rating": 4.1,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -685,6 +725,7 @@
     "latitude": 48.8572513,
     "rating": 4.2,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -701,6 +742,7 @@
     "latitude": 48.8682473,
     "rating": 4.3,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -717,6 +759,7 @@
     "latitude": 48.8597283,
     "rating": 4.4,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -733,6 +776,7 @@
     "latitude": 48.8903877,
     "rating": 4.5,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -749,6 +793,7 @@
     "latitude": 48.8691174,
     "rating": 4.6,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -765,6 +810,7 @@
     "latitude": 48.8449925,
     "rating": 4.7,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -781,6 +827,7 @@
     "latitude": 48.8335021,
     "rating": 4.8,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -797,6 +844,7 @@
     "latitude": 48.8726798,
     "rating": 4.9,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -813,6 +861,7 @@
     "latitude": 48.8829609,
     "rating": 4.0,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -829,6 +878,7 @@
     "latitude": 48.8632185,
     "rating": 4.1,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -845,6 +895,7 @@
     "latitude": 48.8678022,
     "rating": 4.2,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -861,6 +912,7 @@
     "latitude": 48.8366207,
     "rating": 4.3,
     "tags": "Paris • Bar • Chilling",
+    "type": "Wine",
     "photo_url": ""
   },
   {
@@ -877,6 +929,7 @@
     "latitude": 48.869344,
     "rating": 4.4,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -893,6 +946,7 @@
     "latitude": 48.855364,
     "rating": 4.5,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -909,6 +963,7 @@
     "latitude": 48.881078,
     "rating": 4.6,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -925,6 +980,7 @@
     "latitude": 48.864971,
     "rating": 4.7,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -941,6 +997,7 @@
     "latitude": 48.868778,
     "rating": 4.8,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -957,6 +1014,7 @@
     "latitude": 48.819385,
     "rating": 4.9,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -973,6 +1031,7 @@
     "latitude": 48.862822,
     "rating": 4.0,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -989,6 +1048,7 @@
     "latitude": 48.864703,
     "rating": 4.1,
     "tags": "Paris • Bar • Chilling",
+    "type": "Pub",
     "photo_url": ""
   },
   {
@@ -1005,6 +1065,7 @@
     "latitude": 48.870344,
     "rating": 4.2,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -1021,6 +1082,7 @@
     "latitude": 48.859604,
     "rating": 4.3,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -1037,6 +1099,7 @@
     "latitude": 48.831732,
     "rating": 4.4,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -1053,6 +1116,7 @@
     "latitude": 48.848593,
     "rating": 4.5,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   },
   {
@@ -1069,6 +1133,7 @@
     "latitude": 48.865802,
     "rating": 4.6,
     "tags": "Paris • Bar • Chilling",
+    "type": "Beer",
     "photo_url": ""
   }
 ]

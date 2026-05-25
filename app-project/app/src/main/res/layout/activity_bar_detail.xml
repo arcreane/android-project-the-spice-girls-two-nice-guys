@@ -4,21 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="@color/colorBackground"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.TheSpice.Toolbar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_detail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:titleTextColor="?attr/colorOnPrimary"
-            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+            android:background="@color/colorSurfaceSoft"
+            app:titleTextAppearance="@style/TextAppearance.TheSpice.ToolbarTitle"
+            app:titleTextColor="@color/colorTextPrimary"
+            app:navigationIconTint="@color/colorTextPrimary"
+            app:popupTheme="@style/ThemeOverlay.TheSpice.Popup" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -26,6 +29,7 @@
         android:id="@+id/fragment_container_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:background="@color/colorBackground"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
