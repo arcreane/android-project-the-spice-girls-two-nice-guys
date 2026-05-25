@@ -55,6 +55,8 @@ public interface IBarRepository {
     /** Returns all locally cached bars (used when offline). */
     List<Bar> getCachedBars();
 
+    List<Bar> getRecentlyViewedBars(int limit);
+
     // sasha — GPS / Filters
 
     /**
