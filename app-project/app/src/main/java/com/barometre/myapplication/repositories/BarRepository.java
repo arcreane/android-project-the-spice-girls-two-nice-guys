@@ -283,9 +283,9 @@ public class BarRepository implements IBarRepository {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_BARS, null,
-                COLUMN_LAST_VIEWED + " > 0",   // only bars that have been opened
+                COLUMN_LAST_VIEWED + " > 0",
                 null, null, null,
-                COLUMN_LAST_VIEWED + " DESC",  // most recent first
+                COLUMN_LAST_VIEWED + " DESC",
                 String.valueOf(limit));
         return collectAll(cursor);
     }

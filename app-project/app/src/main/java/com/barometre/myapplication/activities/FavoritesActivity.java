@@ -55,16 +55,15 @@ public class FavoritesActivity extends AppCompatActivity {
             emptyView.setVisibility(View.GONE);
 
             BarAdapter adapter = new BarAdapter(favorites, bar -> {
-
                 android.content.Intent intent = new android.content.Intent(
                         this, BarDetailActivity.class);
                 intent.putExtra(BarDetailActivity.EXTRA_BAR, bar);
                 startActivity(intent);
             });
+            adapter.setRemoveFavoriteEnabled(true);
             recyclerView.setAdapter(adapter);
         }
     }
-
 
     @Override
     protected void onResume() {

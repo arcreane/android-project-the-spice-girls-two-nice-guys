@@ -68,13 +68,14 @@ public class FavoritesFragment extends Fragment {
         } else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
+
             BarAdapter adapter = new BarAdapter(favorites, bar -> {
                 if (listener != null) listener.onBarSelected(bar);
             });
+            adapter.setRemoveFavoriteEnabled(true);
             recyclerView.setAdapter(adapter);
         }
     }
-
 
     @Override
     public void onResume() {
