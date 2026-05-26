@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.barometre.myapplication.databinding.ItemBarBinding;
 import com.barometre.myapplication.models.Bar;
+import com.barometre.myapplication.repositories.BarRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,12 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.BarViewHolder> {
 
     private List<Bar> bars = new ArrayList<>();
     private final OnBarClickListener listener;
+
+    private boolean removeFavoriteEnabled = false;
+
+    public void setRemoveFavoriteEnabled(boolean enabled) {
+        this.removeFavoriteEnabled = enabled;
+    }
 
     public BarAdapter(OnBarClickListener listener) {
         this.listener = listener;
@@ -77,6 +84,22 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.BarViewHolder> {
             }
 
             binding.getRoot().setOnClickListener(v -> listener.onBarClick(bar));
+
+            binding.getRoot().setOnLongClickListener(v -> {
+                if (!removeFavoriteEnabled) return false;
+                new android.app.AlertDialog.Builder(v.getContext())
+                        .setTitle(bar.getName())
+                        .setMessage("Remove from favourites?")
+                        .setPositiveButton("Remove", (dialog, which) -> {
+                            BarRepository repo = new BarRepository(v.getContext());
+                            repo.removeFavorite(bar.getId());
+                            bars.remove(bar);
+                            notifyDataSetChanged();
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+                return true;
+            });
         }
     }
 }
