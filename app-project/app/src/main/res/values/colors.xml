@@ -39,5 +39,6 @@
     <!-- Popup -->
     <color name="colorPopupBackground">#EADBCB</color>
     <color name="colorPopupText">#4A3126</color>
+    <color name="colorPopupDark">#F5EDE8</color>
 
 </resources>
